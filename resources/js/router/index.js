@@ -5,6 +5,8 @@ import Orders from '../components/Orders.vue';
 import Statistics from '../components/Statistics.vue';
 import Products from '../components/Products.vue';
 import Customers from '../components/Customers.vue';
+import Categories from '../components/Categories.vue';
+import Payments from '../components/Payments.vue';
 import Home from '../App.vue';
 
 
@@ -38,6 +40,16 @@ const routes = [
         path:'/customers',
         name:'customers',
         component : Customers
+    },
+    {
+        path:'/categories',
+        name:'categories',
+        component : Categories
+    },
+    {
+        path:'/payments',
+        name:'payments',
+        component : Payments
     },
   
     

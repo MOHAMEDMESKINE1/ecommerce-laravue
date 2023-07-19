@@ -64,14 +64,6 @@
                       </div>
         </div>
         <!-- bars -->
-
-
-        
-
-
-      
-
-
         <!-- statistics progress -->
         <div class="row">
                       <div class="col-md-7 grid-margin stretch-card">

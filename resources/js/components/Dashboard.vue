@@ -5,8 +5,8 @@
               <!-- partial:partials/_navbar.html -->
               <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                  <router-link class="navbar-brand brand-logo" to="/dashboard"><img src="assets/images/logo.svg" alt="logo" /></router-link>
-                  <router-link class="navbar-brand brand-logo-mini" to="/dashboard"><img src="assets/images/logo-mini.svg" alt="logo" /></router-link>
+                  <router-link class="navbar-brand brand-logo" to="/statistics"><img src="assets/images/logo.svg" alt="logo" /></router-link>
+                  <router-link class="navbar-brand brand-logo-mini" to="/statistics"><img src="assets/images/logo-mini.svg" alt="logo" /></router-link>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-stretch">
                   <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -172,32 +172,38 @@
                     <li class="nav-item">
                       <router-link class="nav-link" to="/statistics">
                         <span class="menu-title">Dashboard</span>
-                        <i class="mdi mdi-home menu-icon"></i>
+                        <i class="mdi mdi-chart-bar menu-icon"></i>
                       </router-link>
                     </li>
                   
                     <li class="nav-item">
                       <router-link class="nav-link" to="/products">
                         <span class="menu-title">Products</span>
-                        <i class="mdi mdi-contacts menu-icon"></i>
+                        <i class=" mdi mdi-basket menu-icon"></i>
                       </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link class="nav-link" to="/orders">
                         <span class="menu-title">Orders</span>
-                        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                        <i class="mdi mdi-bell-ring-outline menu-icon"></i>
                       </router-link>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="pages/charts/chartjs.html">
+                      <router-link class="nav-link" to="/categories">
                         <span class="menu-title">Categories</span>
-                        <i class="mdi mdi-chart-bar menu-icon"></i>
-                      </a>
+                        <i class=" mdi mdi-format-float-right menu-icon"></i>
+                      </router-link>
                     </li>
                     <li class="nav-item">
                       <router-link class="nav-link" to="/customers">
                         <span class="menu-title">Customers</span>
-                        <i class="mdi mdi-table-large menu-icon"></i>
+                        <i class="mdi mdi-contacts  menu-icon"></i>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
+                      <router-link class="nav-link" to="/payments">
+                        <span class="menu-title">Payments</span>
+                        <i class="mdi mdi-format-strikethrough-variant menu-icon"></i>
                       </router-link>
                     </li>
                     <li class="nav-item">
@@ -221,29 +227,28 @@
                 </nav>
                 <!-- partial -->
                 <div class="main-panel">
-                  <div class="content-wrapper">
-                    <div class="page-header">
-                      <h3 class="page-title">
-                        <span class="page-title-icon bg-gradient-primary text-white me-2">
-                          <i class="mdi mdi-home"></i>
-                        </span> Dashboard
-                      </h3>
-                      <nav aria-label="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li class="breadcrumb-item active" aria-current="page">
-                            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                          </li>
-                        </ul>
-                      </nav>
+                    <div class="content-wrapper">
+                      <div class="page-header">
+                        <router-link to="/statistics" class="page-title nav-link">
+                          <span class="page-title-icon bg-gradient-primary text-white me-2">
+                            <i class="mdi mdi-home"></i>
+                          </span> Dashboard 
+                        </router-link>
+                        <nav aria-label="breadcrumb">
+                          <ul class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">
+                              <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
                     </div>
-                  </div>
                
+                    <div>
+                      <slot>
 
-                  <div>
-                    <slot>
-
-                    </slot>
-                  </div>
+                      </slot>
+                    </div>
                   <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
                       <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>

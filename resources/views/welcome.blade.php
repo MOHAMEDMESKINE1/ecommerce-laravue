@@ -157,6 +157,8 @@
             <div id="app"></div>
  
            
+
+
             <!-- container-scroller -->
             <!-- plugins:js -->
             <script src="assets/vendors/js/vendor.bundle.base.js"></script>
@@ -176,6 +178,6 @@
             <script src="assets/js/todolist.js"></script>
             <!-- End custom js for this page -->
          
-	    @vite('resources/js/app.js')
+	        @vite('resources/js/app.js')
     </body>
 </html>

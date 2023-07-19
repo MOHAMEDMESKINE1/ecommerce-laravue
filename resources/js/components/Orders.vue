@@ -6,6 +6,69 @@
                       <div class="col-12 ">
                         <div class="card m-2">
                           <div class="card-body">
+                            <div class="d-flex justify-content-end mb-2">
+                              <button class="btn btn-sm border border-primary btn-outline-primary ">
+                              
+                                <i class="mdi mdi-hospital  mx-2"></i>
+                                Add Order
+                              </button>
+                            </div>
+                            <h4 class="card-title text-info">Orders List</h4>
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th> Customer </th>
+                                    <th> Product </th>
+                                    <th> Quantity </th>
+                                    <th> Price </th>
+                                    <th> Total Amount </th>
+                                    <th>  Paid </th>
+                                    <th> Status </th>
+                                    <th> Registred  </th>
+                                    <th> Last Updated </th>
+                                    <th> Action </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> Customer name
+                                    </td>
+                                    <td>
+                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> Product description
+                                    </td>
+                                    <td>5 </td>
+                                    <td>5 $</td>
+                                    <td>25 $</td>
+                                    <td> <span class="badge badge-gradient-success p-1  text-white">paid</span></td>
+                                    <td> <span class="badge badge-gradient-danger p-1  text-white">cancelled</span></td>
+                                    <td> Dec 5, 2017 </td>
+                                    <td> Dec 5, 2017  </td>
+                                    <td> 
+                                      <div class="">
+                                        <a href="" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                        <a href="" class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        </div>
+        <!-- recents orders -->
+       </Dashboard>
+    </div>
+
+    <!-- 
+      <div class="row ">
+                      <div class="col-12 ">
+                        <div class="card m-2">
+                          <div class="card-body">
                             <h4 class="card-title">Recent Tickets</h4>
                             <div class="table-responsive">
                               <table class="table">
@@ -70,9 +133,7 @@
                         </div>
                       </div>
         </div>
-        <!-- recents orders -->
-       </Dashboard>
-    </div>
+    -->
 </template>
 <script setup>
 import Dashboard from './Dashboard.vue';

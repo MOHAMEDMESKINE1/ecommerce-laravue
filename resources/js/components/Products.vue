@@ -2,7 +2,7 @@
     <div>
         <Dashboard>
               <!-- products -->
-        <div class="row">
+        <!-- <div class="row">
                       <div class="col-12 grid-margin stretch-card">
                         <div class="card m-2">
                           <div class="card-body">
@@ -36,6 +36,65 @@
                               <div class="ms-auto">
                                 <i class="mdi mdi-heart-outline text-muted"></i>
                               </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        </div> -->
+        
+        <div class="row ">
+                      <div class="col-12 ">
+                        <div class="card m-2">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-end mb-2">
+                              <button class="btn btn-sm border border-primary btn-outline-primary ">
+                              
+                                <i class="mdi mdi-hospital  mx-2"></i>
+                                Add Product
+                              </button>
+                            </div>
+                            <h4 class="card-title text-info">Products List</h4>
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th> Product </th>
+                                    <th> Description </th>
+                                    <th> Current Price  </th>
+                                    <th> Old Price  </th>
+                                    <th> Quantity  </th>
+                                    <th> Category  </th>
+                                    <th> Created </th>
+                                    <th> Last Updated </th>
+                                    <th> Action </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
+                                    </td>
+                                    <td> Lorem ipsum dolor sit amet.</td>
+                                    <td> 100 $ </td>
+                                    <td class="text-decoration-line-through text-danger fw-bold"> 200 $ </td>
+                                    <td>
+                                      <h1 class="badge badge-gradient-success   text-white">10</h1>
+                                    </td>
+                                    <td>
+                                      <h1 class="badge badge-gradient-primary   text-white">T-shirts</h1>
+                                    </td>
+                                    <td> Dec 5, 2017  </td>
+                                    <td> Dec 5, 2017  </td>
+                                    <td> 
+                                      <div class="">
+                                        <a href="" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                        <a href="" class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
                             </div>
                           </div>
                         </div>
