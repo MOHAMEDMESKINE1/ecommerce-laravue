@@ -267,4 +267,14 @@
  </template>
 
 <script setup>
+
 </script>
+<style scoped>
+
+/* li:hover{
+  background-color: #58486b;
+
+  border-radius: 5px;
+} */
+
+</style>

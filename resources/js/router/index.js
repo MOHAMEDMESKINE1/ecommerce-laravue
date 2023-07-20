@@ -1,12 +1,12 @@
 import { createRouter,createWebHistory } from "vue-router";
 
 import Dashboard from '../components/Dashboard.vue';
-import Orders from '../components/Orders.vue';
-import Statistics from '../components/Statistics.vue';
-import Products from '../components/Products.vue';
-import Customers from '../components/Customers.vue';
-import Categories from '../components/Categories.vue';
-import Payments from '../components/Payments.vue';
+import Orders from '../components/orders/index.vue';
+import Statistics from '../components/statistics/index.vue';
+import Products from '../components/products/index.vue';
+import Customers from '../components/customers/index.vue';
+import Categories from '../components/categories/index.vue';
+import Payments from '../components/payments/index.vue';
 import Home from '../App.vue';
 
 
