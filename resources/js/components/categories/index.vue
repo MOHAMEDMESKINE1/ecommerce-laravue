@@ -68,7 +68,7 @@
                                     <td> 
                                       <div class="">
                                         <a href="#" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
-                                        <a href="#" @click.prevent="failedCategory" class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                        <a href="#" @click.prevent="Confirmation" class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                       </div>
                                     </td>
                                   </tr>
@@ -87,7 +87,7 @@
 <script setup>
 import Dashboard from '../Dashboard.vue';import { ref } from 'vue';
 
-import {showToast,errorToast} from "../../toaster.js"
+import {showToast,errorToast,showConfirmation} from "../../toaster.js"
   // form inputs
   const category = ref({ name: "", })
 
@@ -95,9 +95,20 @@ import {showToast,errorToast} from "../../toaster.js"
       showToast('Category added succefully!');
   
   }
-  function failedCategory() {
-    errorToast('Category deleted succefully!');
-  
-  }
+  async function  Confirmation() {
+      const confirmed = await showConfirmation(
+        'Are you sure?',
+        'This action cannot be undone!',
+        'Yes, proceed!',
+        'No, cancel!'
+      );
+
+      if (confirmed) {
+        showToast('Category deleted successfully!');
+      
+      } else {
+        errorToast('Category cancelled');
+      }
+    }
 
 </script>

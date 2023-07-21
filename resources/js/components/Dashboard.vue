@@ -226,40 +226,34 @@
                   </ul>
                 </nav>
                 <!-- partial -->
-                <div class="main-panel">
-                    <div class="content-wrapper">
-                      <div class="page-header">
+                <div class="main-panel ">
+                  <div class="page-header m-5">
                         <router-link to="/statistics" class="page-title nav-link">
                           <span class="page-title-icon bg-gradient-primary text-white me-2">
                             <i class="mdi mdi-home"></i>
                           </span> Dashboard 
                         </router-link>
-                        <nav aria-label="breadcrumb">
-                          <ul class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">
-                              <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
+                       
                     </div>
                
-                    <div>
+                    
                       <slot>
 
                       </slot>
-                    </div>
-                  <footer class="footer">
+                    
+                <div class="mt-5">
+                  <footer class="footer mt-5">
                     <div class="container-fluid d-flex justify-content-between">
                       <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
                       <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
                     </div>
                   </footer>
-                  <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
+                
+                </div>
+             
               </div>
-              <!-- page-body-wrapper ends -->
+            
             </div>
             
     </div>
@@ -271,10 +265,10 @@
 </script>
 <style scoped>
 
-/* li:hover{
-  background-color: #58486b;
+li:hover{
+  background-color: #ddd;
 
   border-radius: 5px;
-} */
+}
 
 </style>

@@ -36,8 +36,8 @@
                                     <td> WD-12345 </td>
                                     <td> 
                                       <div class="">
-                                        <a href="" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
-                                        <a href="" class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                        <a href="#" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                        <a href="#" @click.prevent="Confirmation" class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                       </div>
                                     </td>
                                   </tr>
@@ -56,5 +56,25 @@
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
+import {showToast,errorToast,showConfirmation} from "../../toaster.js"
 
+function SuccessCategory() {
+      showToast('Category added succefully!');
+  
+  }
+async function  Confirmation() {
+      const confirmed = await showConfirmation(
+        'Are you sure?',
+        'This action cannot be undone!',
+        'Yes, proceed!',
+        'No, cancel!'
+      );
+
+      if (confirmed) {
+        showToast('Cusomer deleted successfully!');
+      
+      } else {
+        errorToast('Customer cancelled');
+      }
+    }
 </script>

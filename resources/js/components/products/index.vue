@@ -1,7 +1,7 @@
 <template>
 
 
-  <!-- add Product -->
+<!-- add Product -->
 <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -116,7 +116,7 @@
                                     <td> 
                                       <div class="">
                                         <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
-                                        <a href="#" @click.prevent="deletedProduct()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                        <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                       </div>
                                     </td>
                                   </tr>
@@ -138,7 +138,7 @@
 import Dashboard from '../Dashboard.vue';
 import { ref } from 'vue';
 
-import {showToast,errorToast} from "../../toaster.js"
+import {showToast,errorToast,showConfirmation} from "../../toaster.js"
   // form inputs
   const product = ref({
     name: "product name",
@@ -150,13 +150,25 @@ import {showToast,errorToast} from "../../toaster.js"
   })
 
   function addedProduct() {
-      showToast('Product added succefully!');
+      showToast('Product saved succefully!');
   
   }
-  function deletedProduct() {
-    errorToast('Product deleted succefully!');
-  
-  }
+  async function  Confirmation() {
+      const confirmed = await showConfirmation(
+        'Are you sure?',
+        'This action cannot be undone!',
+        'Yes, proceed!',
+        'No, cancel!'
+      );
+
+      if (confirmed) {
+        showToast('Order deleted successfully!');
+      
+      } else {
+        errorToast('Order cancelled');
+      }
+    }
+
 
   
   

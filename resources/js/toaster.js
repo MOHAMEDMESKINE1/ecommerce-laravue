@@ -1,5 +1,5 @@
 import { useToast } from 'vue-toastification';
-
+import Swal from 'sweetalert2';
 // const toast = useToast();
 export function  showToast(message,options = {}) {
   const toast = useToast();
@@ -27,3 +27,24 @@ export function  errorToast(message,options = {} ) {
     ...options,
   });
 }
+
+
+export function showConfirmation(title, text, confirmButtonText, cancelButtonText) {
+  return new Promise((resolve) => {
+    Swal.fire({
+      title: title || 'Are you sure?',
+      text: text || 'This action cannot be undone!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText || 'Yes, proceed!',
+      cancelButtonText: cancelButtonText || 'No, cancel!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        resolve(true); // User clicked the "Confirm" button
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        resolve(false); // User clicked the "Cancel" button
+      }
+    });
+  });
+}
+
