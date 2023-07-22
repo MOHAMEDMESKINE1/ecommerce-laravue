@@ -51,17 +51,17 @@
 
            <!-- paid -->
           
-           <div class="d-flex shadow-none border border-2 mb-2 p-1 rounded">
-            <label for="total" class="mb-2 text-seondary" >Payment</label>
+           <div class="d-flex justify-content-center shadow-none border border-2 mb-2 p-1 rounded">
+            <!-- <label for="total" class="mb-2 text-seondary" >Payment</label> -->
 
            
            <div class="form-check form-check-inline mb-2">
             <input class="form-check-input" type="radio" v-model="product.payment" name="paid" id="paid" value="Paid">
-            <label class="form-check-label" for="paid">Paid</label>
+            <label class="form-check-label fw-bold" for="paid">Paid</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" v-model="product.payment" name="notpaid" id="notpaid" value="Not Paid">
-            <label class="form-check-label" for="notpaid">Not Paid</label>
+            <label class="form-check-label fw-bold" for="notpaid">Not Paid</label>
           </div>
         </div>
           <!-- status -->
@@ -141,9 +141,12 @@
                                   <td> Dec 5, 2017 </td>
                                   <td> Dec 5, 2017  </td>
                                   <td> 
-                                    <div class="">
+                                    <div class="d-flex justify-content-between">
+                                      
+                                       <router-link to="/orders_details"  class=" mdi mdi-eye text-success fs-4  mx-2"></router-link>
                                       <a href="#" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
                                       <a href="#"  @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+
                                     </div>
                                   </td>
                                 </tr>
@@ -156,6 +159,7 @@
                     </div>
       </div>
       <!-- recents orders -->
+      <Pagination></Pagination>
       </Dashboard>
   </div>
 
@@ -163,6 +167,8 @@
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
+import Pagination from '../Pagination.vue';
+
 import { ref } from 'vue';
 import {showToast,errorToast,showConfirmation} from "../../toaster.js";
 

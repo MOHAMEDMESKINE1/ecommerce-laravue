@@ -32,7 +32,7 @@
                                     <td> 100$ </td>
                                     <td> 19/07/2023 17:45:23 </td>
                                     <td> 20/07/2023 17:45:23 </td>
-                                    <td> <a href="" class=" mdi mdi-eye text-success fs-4  mx-2"></a></td>
+                                    <td> <router-link to="/payment_details"  class=" mdi mdi-eye text-success fs-4  mx-2"></router-link></td>
                                   </tr>
                                  
                                 </tbody>
@@ -41,12 +41,18 @@
                           </div>
                         </div>
                       </div>
+          <!-- pagination -->
+         <Pagination></Pagination>
+          <!-- pagination -->
         </div>
+        
         </Dashboard>
+        
     </div>
 
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
+import Pagination from '../Pagination.vue';
 
 </script>

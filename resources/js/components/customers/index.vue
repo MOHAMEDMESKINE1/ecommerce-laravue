@@ -1,4 +1,50 @@
 <template>
+<!-- add Customer -->
+<div class="modal fade" id="addCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-info" id="exampleModalLabel">Add Customer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <!--  name -->
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control shadow-none border border-2" name="customer" v-model="customer.name" id="product" >
+              <label for="customer" class="fw-bold" > Name</label>
+            </div>
+            <!--  photo -->
+            <div class="form-floating p-0 mb-3">
+              <input class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo" name="photo"  type="file">
+              <label for="photo" class="fw-bold" >Photo </label>
+
+            </div>
+
+            <!--  role -->
+            <div class="form-floating mb-3">
+              <select name="role" id="role" v-model="customer.role" class="form-select shadow-none border border-2" >
+                <option selected class="text-secondary">Open this select role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+              <label for="Role"  class="fw-bold" >Role</label>
+
+            </div>
+            
+            <div class="d-flex ">
+              <button type="button"  @click="addCustomer"  class="btn btn-info">Save changes</button>
+              <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+
+            </div>
+            
+          </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- add Customer -->
     <div >
        <Dashboard>
          <!-- recents orders -->
@@ -8,7 +54,9 @@
                         <div class="card m-2">
                           <div class="card-body">
                             <div class="d-flex justify-content-end mb-2">
-                              <button class="btn btn-sm border border-primary btn-outline-primary ">
+                              <button class="btn btn-sm border border-primary btn-outline-primary "
+                              data-bs-toggle="modal" data-bs-target="#addCustomer"
+                              >
                               
                                 <i class="mdi mdi-hospital  mx-2"></i>
                                 Add Customer
@@ -21,6 +69,7 @@
                                   <tr>
                                     <th> Customer </th>
                                     <th> Email </th>
+                                    <th> Role </th>
                                     <th> Registred </th>
                                     <th> Last Updated  </th>
                                     <th> Action </th>
@@ -32,6 +81,17 @@
                                       <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
                                     </td>
                                     <td> customer@gmail.com </td>
+                                    <!-- role -->
+                                    <td> 
+                                         
+                                            <div class=" mb-3">
+                                              <select name="role" id="role" v-model="customer.role" style="width: 105px; " class="form-select  shadow-none border border-2" >
+                                                <option value="admin">Admin</option>
+                                                <option value="user">User</option>
+                                              </select>
+                                            </div>
+                                    </td>
+                                    <!-- role -->
                                     <td> Dec 5, 2017 </td>
                                     <td> WD-12345 </td>
                                     <td> 
@@ -51,17 +111,29 @@
                       </div>
         </div>
         <!-- recents orders -->
+        <Pagination></Pagination>
+        import Pagination from '../Pagination.vue';
+
        </Dashboard>
     </div>
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
-import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import Pagination from '../Pagination.vue';
 
-function SuccessCategory() {
-      showToast('Category added succefully!');
-  
-  }
+import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import { ref } from 'vue';
+
+  const customer = ref({
+    name:"",
+    role:"admin",
+
+  })
+
+  function addCustomer() {
+        showToast('Customer added succefully!');
+    
+    }
 async function  Confirmation() {
       const confirmed = await showConfirmation(
         'Are you sure?',
@@ -71,7 +143,7 @@ async function  Confirmation() {
       );
 
       if (confirmed) {
-        showToast('Cusomer deleted successfully!');
+        showToast('Customer deleted successfully!');
       
       } else {
         errorToast('Customer cancelled');

@@ -207,6 +207,12 @@
                       </router-link>
                     </li>
                     <li class="nav-item">
+                      <router-link class="nav-link" to="/contacts">
+                        <span class="menu-title">Contacts</span>
+                        <i class="mdi mdi-account-card-details menu-icon"></i>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">
                       <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                         <span class="menu-title">Sample Pages</span>
                         <i class="menu-arrow"></i>
@@ -265,7 +271,7 @@
 </script>
 <style scoped>
 
-li:hover{
+nav ul li:hover{
   background-color: #ddd;
 
   border-radius: 5px;

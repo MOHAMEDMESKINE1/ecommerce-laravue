@@ -80,12 +80,15 @@
                         </div>
                       </div>
         </div>
+        <Pagination></Pagination>
         </Dashboard>
     </div>
 
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';import { ref } from 'vue';
+import Pagination from '../Pagination.vue';
+
 
 import {showToast,errorToast,showConfirmation} from "../../toaster.js"
   // form inputs

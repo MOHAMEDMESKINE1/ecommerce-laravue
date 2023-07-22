@@ -129,6 +129,10 @@
                       </div>
         </div>
         <!-- products -->
+        <!-- pagination -->
+          <Pagination></Pagination>
+        <!-- pagination -->
+
         </Dashboard>
     </div>
 
@@ -136,6 +140,8 @@
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
+import Pagination from '../Pagination.vue';
+
 import { ref } from 'vue';
 
 import {showToast,errorToast,showConfirmation} from "../../toaster.js"
@@ -162,10 +168,10 @@ import {showToast,errorToast,showConfirmation} from "../../toaster.js"
       );
 
       if (confirmed) {
-        showToast('Order deleted successfully!');
+        showToast('Product deleted successfully!');
       
       } else {
-        errorToast('Order cancelled');
+        errorToast('Product cancelled');
       }
     }
 
