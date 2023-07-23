@@ -26,7 +26,7 @@
               <select name="role" id="role" v-model="customer.role" class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary">Open this select role</option>
                 <option value="admin">Admin</option>
-                <option value="user">User</option>
+                <option value="customer">Customer</option>
               </select>
               <label for="Role"  class="fw-bold" >Role</label>
 
@@ -64,7 +64,7 @@
                             </div>
                             <h4 class="card-title text-info"> Customers List</h4>
                             <div class="table-responsive">
-                              <table class="table">
+                              <table class="table table-bordered p-2 text-center">
                                 <thead>
                                   <tr>
                                     <th> Customer </th>
@@ -84,10 +84,10 @@
                                     <!-- role -->
                                     <td> 
                                          
-                                            <div class=" mb-3">
-                                              <select name="role" id="role" v-model="customer.role" style="width: 105px; " class="form-select  shadow-none border border-2" >
+                                            <div class=" d-flex justify-content-center mb-3">
+                                              <select name="role" id="role" v-model="customer.role" style="width: 135px; " class="form-select  shadow-none border border-2" >
                                                 <option value="admin">Admin</option>
-                                                <option value="user">User</option>
+                                                <option value="customer">Customer</option>
                                               </select>
                                             </div>
                                     </td>
@@ -112,7 +112,6 @@
         </div>
         <!-- recents orders -->
         <Pagination></Pagination>
-        import Pagination from '../Pagination.vue';
 
        </Dashboard>
     </div>

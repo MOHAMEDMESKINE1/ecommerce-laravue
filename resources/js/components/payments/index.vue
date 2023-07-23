@@ -8,7 +8,7 @@
                           <div class="card-body">
                             <h4 class="card-title text-info">Payments List</h4>
                             <div class="table-responsive">
-                              <table class="table ">
+                              <table class="table text-center table-bordered p-2">
                                 <thead class="text-lead">
                                   <tr>
                                     <th> Customer </th>

@@ -48,11 +48,11 @@
                                 Add Category
                               </button>
                             </div>
-                            <h4 class="card-title text-info">Categories List</h4>
+                            <h4 class="card-title  text-info">Categories List</h4>
                             <div class="table-responsive">
-                              <table class="table ">
-                                <thead class="text-lead">
-                                  <tr>
+                              <table class="table table-bordered p-2 text-center">
+                                <thead class="text-lead ">
+                                  <tr >
                                     <th> Name </th>
                                     <th> Registred  </th>
                                     <th> Last Updated </th>
@@ -92,7 +92,7 @@ import Pagination from '../Pagination.vue';
 
 import {showToast,errorToast,showConfirmation} from "../../toaster.js"
   // form inputs
-  const category = ref({ name: "", })
+  const category = ref({ name: "T-Shirt", })
 
   function SuccessCategory() {
       showToast('Category added succefully!');

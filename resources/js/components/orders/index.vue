@@ -110,7 +110,7 @@
                           </div>
                           <h4 class="card-title text-info">Orders List</h4>
                           <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-bordered p-2 text-center">
                               <thead>
                                 <tr>
                                   <th> Customer </th>
@@ -141,7 +141,7 @@
                                   <td> Dec 5, 2017 </td>
                                   <td> Dec 5, 2017  </td>
                                   <td> 
-                                    <div class="d-flex justify-content-between">
+                                    <div   class="d-flex justify-content-between">
                                       
                                        <router-link to="/orders_details"  class=" mdi mdi-eye text-success fs-4  mx-2"></router-link>
                                       <a href="#" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>

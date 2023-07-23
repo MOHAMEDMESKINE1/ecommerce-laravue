@@ -9,7 +9,7 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <router-link to="/orders">
-                            <span class="card-title">Orders List <span class="text-muted fw-bold ms-2">(834)</span></span>
+                            <span class="card-title text-primary text-muted fw-bold ms-2">Orders List (834)</span>
 
                        </router-link>
                     </div>

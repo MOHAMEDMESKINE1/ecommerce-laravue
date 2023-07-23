@@ -1,12 +1,13 @@
  <template>
-    <div>
-        <div class="container-scroller">
+
+    <div :class="{ 'dark-mode': darkMode }">
+        <div  class="container-scroller"  >
             
               <!-- partial:partials/_navbar.html -->
-              <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                  <router-link class="navbar-brand brand-logo" to="/statistics"><img src="assets/images/logo.svg" alt="logo" /></router-link>
-                  <router-link class="navbar-brand brand-logo-mini" to="/statistics"><img src="assets/images/logo-mini.svg" alt="logo" /></router-link>
+              <nav :class="{ 'dark-mode': darkMode }"  class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <div  class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                  <router-link  class="navbar-brand brand-logo" to="/home"><img src="assets/images/logo.svg" alt="logo" /></router-link>
+                  <router-link class="navbar-brand brand-logo-mini" to="/home"><img src="assets/images/logo-mini.svg" alt="logo" /></router-link>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-stretch">
                   <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -34,7 +35,7 @@
                         </div>
                       </a>
                       <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="">
                           <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
@@ -44,6 +45,11 @@
                     <li class="nav-item d-none d-lg-block full-screen-link">
                       <a class="nav-link">
                         <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                      </a>
+                    </li>
+                    <li class="nav-item d-none d-lg-block full-screen-link">
+                      <a class="nav-link">
+                        <button @click="toggleDarkMode">Toggle Dark Mode</button>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -151,9 +157,9 @@
                 </div>
               </nav>
               <!-- partial -->
-              <div class="container-fluid page-body-wrapper">
+              <div  class="container-fluid page-body-wrapper">
                 <!-- partial:partials/_sidebar.html -->
-                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <nav :class="{ 'dark-mode': darkMode }"  class="sidebar sidebar-offcanvas" id="sidebar">
                   <ul class="nav">
                     <li class="nav-item nav-profile">
                       <a href="#" class="nav-link">
@@ -196,7 +202,7 @@
                     </li>
                     <li class="nav-item">
                       <router-link class="nav-link" to="/customers">
-                        <span class="menu-title">Customers</span>
+                        <span class="menu-title ">Customers</span>
                         <i class="mdi mdi-contacts  menu-icon"></i>
                       </router-link>
                     </li>
@@ -248,9 +254,9 @@
                       </slot>
                     
                 <div class="mt-5">
-                  <footer class="footer mt-5">
+                  <footer :class="{ 'dark-mode': darkMode }" class="footer mt-5">
                     <div class="container-fluid d-flex justify-content-between">
-                      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
+                      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © 2023</span>
                       <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
                     </div>
                   </footer>
@@ -262,11 +268,15 @@
             
             </div>
             
-    </div>
-   
+    </div>   
  </template>
 
 <script setup>
+import {  inject } from 'vue';
+
+    // Inject the darkMode variable from the app entry point
+    const darkMode = inject('darkMode');
+    const toggleDarkMode = inject('toggleDarkMode');
 
 </script>
 <style scoped>
@@ -274,7 +284,20 @@
 nav ul li:hover{
   background-color: #ddd;
 
-  border-radius: 5px;
+ 
 }
 
+
+</style>
+<style>
+/* Custom styles for dark mode */
+/* [data-theme="dark"] {
+  .navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+  }
+} */
+.dark-mode {
+  background-color: #013336;
+  color: #32e2d9;
+}
 </style>

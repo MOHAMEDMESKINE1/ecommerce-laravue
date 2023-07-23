@@ -11,18 +11,36 @@ import Payments from '../components/payments/index.vue';
 import PaymentsDetails from '../components/payments/Details.vue';
 import Contacts from '../components/contacts/index.vue';
 import Home from '../App.vue';
-import ProgressBar from '../ProgressBar.vue';
+import IndexHome from '../Home.vue';
+
+import Products_Details from '../Details.vue';
+
 const routes = [
     {
         path:'/dashboard',
         name:'Dashboard',
         component : Dashboard
     },
+    // front end
+
+    {
+        path:'/home',
+        name:'index_home',
+        component : IndexHome
+    },
+    {
+        path:'/details_product',
+        name:'details_product',
+        component : Products_Details
+    },
+
+    // backend
     {
         path:'/',
         name:'home',
         component : Home
     },
+   
     {
         path:'/orders',
         name:'orders',

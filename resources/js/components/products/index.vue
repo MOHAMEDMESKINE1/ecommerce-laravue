@@ -83,7 +83,7 @@
                             </div>
                             <h4 class="card-title text-info">Products List</h4>
                             <div class="table-responsive">
-                              <table class="table">
+                              <table class="table  table-bordered p-2 text-center">
                                 <thead>
                                   <tr>
                                     <th> Product </th>
@@ -97,7 +97,29 @@
                                     <th> Action </th>
                                   </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="table-striped ">
+                                  <tr>
+                                    <td>
+                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
+                                    </td>
+                                    <td> Lorem ipsum dolor sit amet.</td>
+                                    <td> 100 $ </td>
+                                    <td class="text-decoration-line-through text-danger fw-bold"> 200 $ </td>
+                                    <td>
+                                      <h1 class="badge badge-gradient-success   text-white">10</h1>
+                                    </td>
+                                    <td>
+                                      <h1 class="badge badge-gradient-primary   text-white">T-shirts</h1>
+                                    </td>
+                                    <td> Dec 5, 2017  </td>
+                                    <td> Dec 5, 2017  </td>
+                                    <td> 
+                                      <div class="">
+                                        <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                        <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                      </div>
+                                    </td>
+                                  </tr>
                                   <tr>
                                     <td>
                                       <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
