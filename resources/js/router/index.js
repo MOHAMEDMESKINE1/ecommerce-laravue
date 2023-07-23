@@ -12,6 +12,11 @@ import PaymentsDetails from '../components/payments/Details.vue';
 import Contacts from '../components/contacts/index.vue';
 import Home from '../App.vue';
 import IndexHome from '../Home.vue';
+import Cart from '../Cart.vue';
+import Shop from '../Shop.vue';
+import Checkout from '../Checkout.vue';
+import Contact from '../Contact.vue';
+
 
 import Products_Details from '../Details.vue';
 
@@ -32,6 +37,26 @@ const routes = [
         path:'/details_product',
         name:'details_product',
         component : Products_Details
+    },
+    {
+        path:'/cart',
+        name:'cart',
+        component : Cart
+    },
+    {
+        path:'/shop',
+        name:'shop',
+        component : Shop
+    },
+    {
+        path:'/checkout',
+        name:'checkout',
+        component : Checkout
+    },
+    {
+        path:'/contact',
+        name:'contact',
+        component : Contact
     },
 
     // backend

@@ -1,16 +1,17 @@
 <template>
     <div>
 
-    <!-- navbar start -->
-        <Nav></Nav>
-    <!-- navbar end -->
+    <!-- main start -->
+    <Main>
 
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
+    <div class="container-fluid mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop Detail</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0">
+                    <router-link to="/home" class="text-primary nav-link">Home</router-link>
+                </p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Shop Detail</p>
             </div>
@@ -345,15 +346,12 @@
     </div>
     <!-- Products End -->
 
-    <!-- footer -->
-        <Footer></Footer>
-    <!-- footer -->
+   </Main>
             
     </div>
 </template>
 
 <script setup>
-import Nav from './layouts/Nav.vue';
-import Footer from './layouts/Footer.vue';
+import Main from './layouts/Main.vue';
 
 </script>
