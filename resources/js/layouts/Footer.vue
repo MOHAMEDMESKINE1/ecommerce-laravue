@@ -62,7 +62,7 @@
        <button
        @click="backToTop"
         type="button"
-        class="btn btn-danger rounded-circle btn-floating "
+        class="btn btn-gradient-success rounded-circle btn-floating "
         id="btn-back-to-top"
                 >
         <i class="fas fa-arrow-up"></i>

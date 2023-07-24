@@ -9,43 +9,85 @@
         <h1 class="modal-title fs-5 text-info" id="exampleModalLabel">Add Product</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
         <form>
-            <!--  name -->
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control shadow-none border border-2" name="product" v-model="product.name" id="product" >
-              <label for="product" class="fw-bold" >Product Name</label>
-            </div>
-            <!--  photo -->
-            <div class="form-floating p-0 mb-3">
-              <input class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo" name="photo"  type="file">
-              <label for="photo" class="fw-bold" >Photo </label>
+           <div class="row">
+              <div class="col-md-6">
+                 <!--  name -->
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control shadow-none border border-2" name="product" v-model="product.name" id="product" >
+                    <label for="product" class="fw-bold" >Product Name</label>
+                  </div>
+                  <!--  photo -->
+                  <div class="form-floating p-0 mb-3">
+                    <input class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo" name="photo"  type="file">
+                    <label for="photo" class="fw-bold" >Photo </label>
 
-            </div>
-            <!--  description -->
-            <div class="form-floating mb-3">
-              <textarea  class="form-control shadow-none border border-2" name="description" v-model="product.description" id="description"></textarea>
-              <label for="description" class="fw-bold" >Description</label>
-            </div>
-            <!--  price -->
-            <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="price" v-model="product.price" id="price"/>
-              <label for="price" class="fw-bold" >Price</label>
-            </div>
-            <!--  old_price -->
-            <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="old_price" v-model="product.old_price" id="old_price"/>
-              <label for="old_price" class="fw-bold" >Old Price</label>
-            </div>
-            <!--  quantity -->
-            <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="quantity" v-model="product.quantity" id="quantity"/>
-              <label for="quantity" class="fw-bold" >Quantity</label>
-            </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <!--  description -->
+                <div class="form-floating mb-3">
+                  <textarea  class="form-control shadow-none border border-2" name="description" v-model="product.description" id="description"></textarea>
+                  <label for="description" class="fw-bold" >Description</label>
+                </div>
+                <!--  price -->
+                <div class="form-floating mb-3">
+                  <input type="number"  class="form-control shadow-none border border-2" name="price" v-model="product.price" id="price"/>
+                  <label for="price" class="fw-bold" >Price</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                  <!--  old_price -->
+                  <div class="form-floating mb-3">
+                    <input type="number"  class="form-control shadow-none border border-2" name="old_price" v-model="product.old_price" id="old_price"/>
+                    <label for="old_price" class="fw-bold" >Old Price</label>
+                  </div>
+                  <!--  quantity -->
+                  <div class="form-floating mb-3">
+                    <input type="number"  class="form-control shadow-none border border-2" name="quantity" v-model="product.quantity" id="quantity"/>
+                    <label for="quantity" class="fw-bold" >Quantity</label>
+                  </div>
+              </div>
+              <!-- size -->
+              <div class="col-md-11 mb-3 mx-auto ">
+
+                  <div class="d-flex justify-content-between  border border-2 p-2">
+
+                    <input class="form-check-input" type="radio" v-model="product.size" id="XS" name="size" value="XS">
+                    <label class="form-check-label " for="XS">XS</label>
+                    <input class="form-check-input" type="radio" v-model="product.size" id="XL" name="size" value="XL">
+                    <label class="form-check-label " for="XL">XL</label>
+                    <input class="form-check-input" type="radio" v-model="product.size" id="S" name="size" value="S">
+                    <label class="form-check-label " for="S">S</label>
+                    <input class="form-check-input" type="radio" v-model="product.size" id="M" name="size" value="M">
+                    <label class="form-check-label " for="M">M</label>
+                    <input class="form-check-input" type="radio" v-model="product.size" id="L" name="size" value="L">
+                    <label class="form-check-label " for="L">L</label>
+
+                  </div>
+                  <!-- color -->
+                  <div class="d-flex justify-content-between  border border-2 p-2 mt-3 ">
+
+                    <input class="form-check-input " type="radio" v-model="product.color" id="Red" name="color" value="Red">
+                    <label class="form-check-label text-danger " for="Red">Red</label>
+                    <input class="form-check-input" type="radio" v-model="product.color" id="Black" name="color" value="Black">
+                    <label class="form-check-label " for="Black">Black</label>
+                    <input class="form-check-input" type="radio" v-model="product.color" id="White" name="color" value="White">
+                    <label class="form-check-label text-secondary  " for="White">White</label>
+                    <input class="form-check-input" type="radio" v-model="product.color" id="Yellow" name="color" value="Yellow">
+                    <label class="form-check-label text-warning " for="Yellow">Yellow</label>
+                    <input class="form-check-input" type="radio" v-model="product.color" id="Green" name="color" value="Green">
+                    <label class="form-check-label  text-success" for="Green">Green</label>
+
+                  </div>
+                               
+              </div>
+
             <!--  category -->
             <div class="form-floating mb-3">
               <select name="category" id="category" v-model="category" class="form-select shadow-none border border-2" >
-                <option selected class="text-secondary">Open this select category</option>
+                <option selected class="text-secondary">  select category</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -53,12 +95,15 @@
               <label for="category"  class="fw-bold" >Category</label>
 
             </div>
+           
             
             <div class="d-flex ">
               <button type="button"  @click="addedProduct"  class="btn btn-info">Save changes</button>
               <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
 
             </div>
+              </div>
+          
             
           </form>
       </div>
@@ -173,7 +218,9 @@ import {showToast,errorToast,showConfirmation} from "../../toaster.js"
     description :  "description",
     price : 150,
     old_price : 200,
-    quantity : 2
+    quantity : 2,
+    size:"XL",
+    color:"Black"
 
   })
 

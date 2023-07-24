@@ -5,34 +5,35 @@
                 <div class="container-fluid pt-5">
                     <div class="row px-xl-5">
                         <!-- Shop Sidebar Start -->
-                        <div class="d-none d-lg-block mb-4 ">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between mx-auto border text-dark " data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Categories</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav class="collapse show navbar bg-light navbar-vertical  navbar-light align-items-end p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
-                    <div class="navbar-nav w-100 overflow-hidden mx-auto" style="height: 410px">
-                        <div class="nav-item dropdown mx-auto">
-                            <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute  bg-light mx-auto text-dark border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
-                            </div>
-                        </div>
-                       <div class="mx-auto ">
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
-                       </div>
-                    </div>
-                </nav>
+                        <div class="d-none d-lg-block mb-4  ">
+                            <a class="btn shadow-none d-flex align-items-center justify-content-between mx-auto border text-dark " data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                                <h6 class="m-0">Categories</h6>
+                                <i class="fa fa-angle-down text-dark"></i>
+                            </a>
+                        
+                            <nav class="collapse show navbar bg-light navbar-vertical  navbar-light align-items-end p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                                <div class="navbar-nav w-100 overflow-hidden mx-auto" style="height: 410px">
+                                    <div class="nav-item dropdown mx-auto">
+                                        <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
+                                        <div class="dropdown-menu position-absolute  bg-light mx-auto text-dark border-0 rounded-0 w-100 m-0">
+                                            <a href="" class="dropdown-item">Men's Dresses</a>
+                                            <a href="" class="dropdown-item">Women's Dresses</a>
+                                            <a href="" class="dropdown-item">Baby's Dresses</a>
+                                        </div>
+                                    </div>
+                                <div class="mx-auto ">
+                                    <a href="" class="nav-item nav-link">Shirts</a>
+                                    <a href="" class="nav-item nav-link">Jeans</a>
+                                    <a href="" class="nav-item nav-link">Swimwear</a>
+                                    <a href="" class="nav-item nav-link">Sleepwear</a>
+                                    <a href="" class="nav-item nav-link">Sportswear</a>
+                                    <a href="" class="nav-item nav-link">Jumpsuits</a>
+                                    <a href="" class="nav-item nav-link">Blazers</a>
+                                    <a href="" class="nav-item nav-link">Jackets</a>
+                                    <a href="" class="nav-item nav-link">Shoes</a>
+                                </div>
+                                </div>
+                            </nav>
                         </div>
                         <div class="col-lg-3 col-md-12">
                             <!-- Price Start -->
@@ -85,27 +86,27 @@
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="color-1">
                                         <label class="custom-control-label" for="color-1">Black</label>
-                                        <span class="badge border font-weight-normal">150</span>
+                                        <span class="badge badge-dark border font-weight-normal">150</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="color-2">
                                         <label class="custom-control-label" for="color-2">White</label>
-                                        <span class="badge border font-weight-normal">295</span>
+                                        <span class="badge badge-secondary border font-weight-normal">295</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="color-3">
                                         <label class="custom-control-label" for="color-3">Red</label>
-                                        <span class="badge border font-weight-normal">246</span>
+                                        <span class="badge badge-danger border font-weight-normal">246</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="color-4">
                                         <label class="custom-control-label" for="color-4">Blue</label>
-                                        <span class="badge border font-weight-normal">145</span>
+                                        <span class="badge badge-primary border font-weight-normal">145</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="checkbox" class="custom-control-input" id="color-5">
                                         <label class="custom-control-label" for="color-5">Green</label>
-                                        <span class="badge border font-weight-normal">168</span>
+                                        <span class="badge badge-success border font-weight-normal">168</span>
                                     </div>
                                 </form>
                             </div>
@@ -123,27 +124,27 @@
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="size-1">
                                         <label class="custom-control-label" for="size-1">XS</label>
-                                        <span class="badge border font-weight-normal">150</span>
+                                        <span class="badge badge-secondary border font-weight-normal">150</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="size-2">
                                         <label class="custom-control-label" for="size-2">S</label>
-                                        <span class="badge border font-weight-normal">295</span>
+                                        <span class="badge badge-secondary border font-weight-normal">295</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="size-3">
                                         <label class="custom-control-label" for="size-3">M</label>
-                                        <span class="badge border font-weight-normal">246</span>
+                                        <span class="badge badge-secondary border font-weight-normal">246</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                         <input type="checkbox" class="custom-control-input" id="size-4">
                                         <label class="custom-control-label" for="size-4">L</label>
-                                        <span class="badge border font-weight-normal">145</span>
+                                        <span class="badge badge-secondary border font-weight-normal">145</span>
                                     </div>
                                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="checkbox" class="custom-control-input" id="size-5">
                                         <label class="custom-control-label" for="size-5">XL</label>
-                                        <span class="badge border font-weight-normal">168</span>
+                                        <span class="badge badge-secondary border font-weight-normal">168</span>
                                     </div>
                                 </form>
                             </div>
@@ -192,8 +193,8 @@
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex justify-content-between bg-light border">
-                        <router-link to="/details_product" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail </router-link>
-                        <router-link to="/cart" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</router-link>
+                                            <router-link to="/details_product" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail </router-link>
+                                            <router-link to="/cart" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</router-link>
                                         </div>
                                     </div>
                                 </div>
