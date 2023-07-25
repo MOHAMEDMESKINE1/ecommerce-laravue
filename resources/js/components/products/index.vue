@@ -143,7 +143,32 @@
                                   </tr>
                                 </thead>
                                 <tbody class="table-striped ">
-                                  <tr>
+                                
+                                  <template v-for="product in products" :key="product.id">
+                                    <tr>
+                                      <td>
+                                        <img :src="product.photo" class="me-2" alt="image"> {{product.name}}
+                                      </td>
+                                      <td> {{product.description}}</td>
+                                      <td> {{product.price}}</td>
+                                      <td class="text-decoration-line-through text-danger fw-bold"> {{product.old_price}} </td>
+                                      <td>
+                                        <h1 class="badge badge-gradient-success   text-white">{{product.quantity}}</h1>
+                                      </td>
+                                      <td>
+                                        <h1 class="badge badge-gradient-primary   text-white">{{product.categories.name}}</h1>
+                                      </td>
+                                      <td> {{formattedDate(product.created_at,'DD/MM/YYYY HH:mm')}}  </td>
+                                      <td> {{formattedDate(product.updated_at,'DD/MM/YYYY HH:mm')}}  </td>
+                                      <td> 
+                                        <div class="">
+                                          <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                          <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </template>
+                                  <!-- <tr>
                                     <td>
                                       <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
                                     </td>
@@ -164,29 +189,7 @@
                                         <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                       </div>
                                     </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
-                                    </td>
-                                    <td> Lorem ipsum dolor sit amet.</td>
-                                    <td> 100 $ </td>
-                                    <td class="text-decoration-line-through text-danger fw-bold"> 200 $ </td>
-                                    <td>
-                                      <h1 class="badge badge-gradient-success   text-white">10</h1>
-                                    </td>
-                                    <td>
-                                      <h1 class="badge badge-gradient-primary   text-white">T-shirts</h1>
-                                    </td>
-                                    <td> Dec 5, 2017  </td>
-                                    <td> Dec 5, 2017  </td>
-                                    <td> 
-                                      <div class="">
-                                        <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
-                                        <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
-                                      </div>
-                                    </td>
-                                  </tr>
+                                  </tr> -->
                                  
                                 </tbody>
                               </table>
@@ -208,10 +211,18 @@
 <script setup>
 import Dashboard from '../Dashboard.vue';
 import Pagination from '../Pagination.vue';
-
+import { onMounted } from '@vue/runtime-core';
 import { ref } from 'vue';
-
+import moment from 'moment';
 import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import formattedDate from '../../helpers/index.js'
+
+import useProducts from '../../composables/products';
+
+  const {products,getProducts} = useProducts();
+
+  onMounted( getProducts)
+
   // form inputs
   const product = ref({
     name: "product name",
@@ -244,6 +255,7 @@ import {showToast,errorToast,showConfirmation} from "../../toaster.js"
       }
     }
 
+   
 
   
   

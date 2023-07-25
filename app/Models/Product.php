@@ -2,10 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
+use App\Models\Review;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class,'category_id');
+    }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class,'order_id');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class,'review_id');
+    }
 }
