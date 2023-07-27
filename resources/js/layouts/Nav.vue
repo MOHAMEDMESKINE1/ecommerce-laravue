@@ -34,7 +34,7 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <router-link to="/home" class="text-decoration-none">
+                <router-link to="/" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </router-link>
             </div>
@@ -79,7 +79,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <router-link to="/home" class="nav-item nav-link py-md-2 px-md-3">Home </router-link>
+                            <router-link to="/" class="nav-item nav-link py-md-2 px-md-3">Home </router-link>
                             <router-link to="/shop" class="nav-item nav-link py-md-2 px-md-3">Shop </router-link>
                             <router-link to="/details_product" class="nav-item nav-link py-md-2 px-md-3">Details </router-link>
                             <div class="nav-item dropdown">

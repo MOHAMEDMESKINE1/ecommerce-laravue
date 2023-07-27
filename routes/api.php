@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ProductController::class)->group(function(){
 
     Route::get('products','index');
+    Route::get('products/edit/{id}','index');
+    Route::post('products/store','store');
+    Route::put('products/{id}/update','update');
+    Route::delete('products/{id}','delete');
+
+    Route::get('categories','categories');
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

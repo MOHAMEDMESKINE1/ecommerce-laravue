@@ -29,7 +29,7 @@ const routes = [
     // front end
 
     {
-        path:'/home',
+        path:'/',
         name:'index_home',
         component : IndexHome
     },
@@ -61,7 +61,7 @@ const routes = [
 
     // backend
     {
-        path:'/',
+        path:'/home',
         name:'home',
         component : Home
     },
