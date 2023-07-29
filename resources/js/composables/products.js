@@ -3,11 +3,13 @@ import { ref } from "vue";
 import {showToast} from "../toaster.js"
 
 export default function useProducts(){
-    const products = ref([]);
     
-    const getProducts  = async () => {
-        await axios.get("/api/products")
-        .then(response => products.value = response.data )
+    const products = ref([]);
+   
+    const getProducts  = async (page = 1) => {
+      
+        await axios.get(`/api/products?page=${page}`)
+        .then(response => products.value = response.data)
         .catch(err => console.log(err));
 
     }
@@ -17,12 +19,14 @@ export default function useProducts(){
         let config = {
               headers : {"content-type":"multipart/from-data"}
             }    
+
            await axios.post('/api/products/store',data,config)
             .then(res => {
                 getProducts();
                 showToast('Product saved succefully!');
 
               console.log(res);
+
             }).catch(error => {
              
                 console.error(error);
@@ -31,10 +35,8 @@ export default function useProducts(){
         }
     const destroyProduct = async (id)=> {
 
-        let config = {
-              headers : {"content-type":"multipart/from-data"}
-            }    
-           await axios.delete('/api/products/'+id,config)
+          
+           await axios.delete(`/api/products/${id}`)
             .then(res => {
                 getProducts();
 

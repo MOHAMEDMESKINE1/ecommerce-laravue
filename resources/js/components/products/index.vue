@@ -145,7 +145,7 @@
                                 </thead>
                                 <tbody class="table-striped ">
                                 
-                                  <template v-for="product in products" :key="product.id">
+                                  <template v-for="product in products.data" :key="product.id">
                                     <tr>
                                       <td>
                                         <div v-if="product.photo">
@@ -174,28 +174,8 @@
                                       </td>
                                     </tr>
                                   </template>
-                                  <!-- <tr>
-                                    <td>
-                                      <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
-                                    </td>
-                                    <td> Lorem ipsum dolor sit amet.</td>
-                                    <td> 100 $ </td>
-                                    <td class="text-decoration-line-through text-danger fw-bold"> 200 $ </td>
-                                    <td>
-                                      <h1 class="badge badge-gradient-success   text-white">10</h1>
-                                    </td>
-                                    <td>
-                                      <h1 class="badge badge-gradient-primary   text-white">T-shirts</h1>
-                                    </td>
-                                    <td> Dec 5, 2017  </td>
-                                    <td> Dec 5, 2017  </td>
-                                    <td> 
-                                      <div class="">
-                                        <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
-                                        <a href="#" @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
-                                      </div>
-                                    </td>
-                                  </tr> -->
+                         
+                                  
                                  
                                 </tbody>
                               </table>
@@ -206,7 +186,11 @@
         </div>
         <!-- products -->
         <!-- pagination -->
-          <Pagination></Pagination>
+        <Bootstrap5Pagination
+                              :data="products"
+                              @pagination-change-page="getProducts"
+          />
+          
         <!-- pagination -->
 
         </Dashboard>
@@ -215,11 +199,10 @@
 
 </template>
 <script setup>
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import Dashboard from '../Dashboard.vue';
-import Pagination from '../Pagination.vue';
 import { onMounted } from '@vue/runtime-core';
-import { ref,reactive  } from 'vue';
-import moment from 'moment';
+import { ref  } from 'vue';
 import {showToast,errorToast,showConfirmation} from "../../toaster.js"
 import formattedDate from '../../helpers/index.js'
 
