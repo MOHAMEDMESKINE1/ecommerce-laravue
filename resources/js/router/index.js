@@ -5,6 +5,8 @@ import Orders from '../components/orders/index.vue';
 import Orders_Details from '../components/orders/Details.vue';
 import Statistics from '../components/statistics/index.vue';
 import Products from '../components/products/index.vue';
+import Edit from '../components/products/Edit.vue';
+
 import Customers from '../components/customers/index.vue';
 import Categories from '../components/categories/index.vue';
 import Payments from '../components/payments/index.vue';
@@ -73,8 +75,14 @@ const routes = [
     },
     {
         path:'/products',
-        name:'products',
+        name:'products.index',
         component : Products
+    },
+    {
+        path:'/products/edit/:id',
+        name:'products.edit',
+        component : Edit,
+        props : true
     },
     {
         path:'/statistics',

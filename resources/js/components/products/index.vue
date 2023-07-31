@@ -10,13 +10,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body ">
-        <form method="post" enctype="multipart/form-data">
+       
+        <form  method="post" enctype="multipart/form-data">
            <div class="row">
-              <div class="col-md-6">
-                 <!--  name -->
+              <div class="col-6 ">
+                 <!--  title -->
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control shadow-none border border-2" name="title" v-model="title" id="product" >
+                    <input  type="text" class="form-control shadow-none border border-2"  name="title" v-model="title" id="product" />
                     <label for="product" class="fw-bold" >Product Name</label>
+
+                    <!-- error title -->
+                    
+                    <Error  :errors="errors.title"/>
                   </div>
                   <!--  photo -->
                   <div class="form-floating p-0 mb-3">
@@ -28,13 +33,19 @@
               <div class="col-md-6">
                   <!--  description -->
                 <div class="form-floating mb-3">
-                  <textarea  class="form-control shadow-none border border-2" name="" v-model="description" id="description"></textarea>
+                  <textarea  class="form-control shadow-none border border-2" name="description" v-model="description" id="description"></textarea>
                   <label for="description" class="fw-bold" >Description</label>
+
+                   <!-- error description -->
+                  <Error  :errors="errors.description"/>
+
                 </div>
                 <!--  price -->
                 <div class="form-floating mb-3">
-                  <input type="number"  class="form-control shadow-none border border-2" name="price" v-model="price" id="price"/>
+                  <input type="number"   class="form-control shadow-none border border-2" name="price" v-model="price" id="price"/>
                   <label for="price" class="fw-bold" >Price</label>
+                   <!-- error price -->
+                   <Error  :errors="errors.price"/>
                 </div>
               </div>
               <div class="col-md-12">
@@ -42,11 +53,19 @@
                   <div class="form-floating mb-3">
                     <input type="number"  class="form-control shadow-none border border-2" name="old_price" v-model="old_price" id="old_price"/>
                     <label for="old_price" class="fw-bold" >Old Price</label>
+                    
+                    <!-- error old_price -->
+                    <Error  :errors="errors.old_price"/>
+
                   </div>
                   <!--  quantity -->
                   <div class="form-floating mb-3">
                     <input type="number"  class="form-control shadow-none border border-2" name="quantity" v-model="quantity" id="quantity"/>
                     <label for="quantity" class="fw-bold" >Quantity</label>
+
+                     <!-- error quantity -->
+                     <Error  :errors="errors.quantity"/>
+                    
                   </div>
               </div>
               <!-- size -->
@@ -65,7 +84,11 @@
                     <input class="form-check-input" type="radio" v-model="size" id="L" name="size" value="L">
                     <label class="form-check-label " for="L">L</label>
 
+                    
+
                   </div>
+                  <!-- error size -->
+                  <Error  :errors="errors.size"/>
                   <!-- color -->
                   <div class="d-flex justify-content-between  border border-2 p-2 mt-3 ">
 
@@ -80,7 +103,12 @@
                     <input class="form-check-input" type="radio" v-model="color" id="Green" name="color" value="Green">
                     <label class="form-check-label  text-success" for="Green">Green</label>
 
+                      
+
+
                   </div>
+                  <!-- error color -->
+                  <Error  :errors="errors.color"/>
                                
               </div>
 
@@ -94,6 +122,8 @@
             
               </select>
               <label for="category"  class="fw-bold" >Category</label>
+              <!-- error category -->
+              <Error  :errors="errors.category_id"/>
 
             </div>
            
@@ -168,7 +198,7 @@
                                       <td> {{formattedDate(product.updated_at,'DD/MM/YYYY HH:mm')}}  </td>
                                       <td> 
                                         <div class="">
-                                          <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                          <router-link   :to="{name:'products.edit',params:{id:product.id}}" class=" mdi mdi-grease-pencil fs-4  mx-2"></router-link>
                                           <a href="#" @click.prevent="ConfirmationDelete(product.id)"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                         </div>
                                       </td>
@@ -200,20 +230,26 @@
 </template>
 <script setup>
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+import Error from '../../layouts/Error.vue';
+
 import Dashboard from '../Dashboard.vue';
 import { onMounted } from '@vue/runtime-core';
 import { ref  } from 'vue';
-import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import {successToast,errorToast,showConfirmation} from "../../toaster.js"
 import formattedDate from '../../helpers/index.js'
 
 import useProducts from '../../composables/products';
 import useCategories from '../../composables/categories';
 
-  const {products,getProducts,addProduct,destroyProduct} = useProducts();
+
+// produtcs
+  const {products,errors,getProducts,addProduct,destroyProduct,getProduct} = useProducts();
+// categories
   const {categories,getCategories} = useCategories();
 
   onMounted(() => {
     getProducts();
+    getProduct()
     getCategories();
   });
   // form inputs
@@ -227,7 +263,7 @@ import useCategories from '../../composables/categories';
   const size  = ref('');
   const color  = ref('');
 
-  const errors = ref({});
+
   function onImageChanged(e) {
         console.log(e.target.files[0]);
         photo.value=e.target.files[0]
@@ -246,14 +282,15 @@ import useCategories from '../../composables/categories';
         formdata.append('color',color.value)
         formdata.append('category_id',category_id.value)
 
-        addProduct(formdata);
+        
+        addProduct(formdata,'#addProduct','.modal-backdrop');
 
         // clear fields
         resetForm();
         // clear backdrop 
 
-        $('#addProduct').modal('hide');
-				$('.modal-backdrop').css('display','none');
+
+       
 
   }
 
@@ -272,7 +309,7 @@ import useCategories from '../../composables/categories';
 
         destroyProduct(id);
 
-        showToast('Product deleted successfully!');
+        successToast('Product deleted successfully!');
       
       } else {
         errorToast('Product cancelled');

@@ -23,15 +23,14 @@ class ProductRepository  implements RepositoryInterface {
 
     function getById($id){
 
-        return $this->product->findOrFail($id);
+        return $this->product->find($id);
     }
 
     public function store($params){
 
         $filename  = null;
     
-         $this->product->title =  $params["title"];
-         $this->product->description =  $params["description"];
+         
 
          if(request()->hasFile('photo')){
             // get image name
@@ -42,7 +41,8 @@ class ProductRepository  implements RepositoryInterface {
             $this->product->photo =  $filename;
 
         }
-
+        $this->product->title =  $params["title"];
+        $this->product->description =  $params["description"];
         $this->product->price =  intval($params["price"]);
         $this->product->old_price =  intval($params["old_price"]);
         $this->product->quantity =  intval($params["quantity"]);
@@ -61,8 +61,6 @@ class ProductRepository  implements RepositoryInterface {
 
         $filename  = null;
     
-         $this->product->title =  $params["title"];
-         $this->product->description =  $params["description"];
 
          if(request()->hasFile('photo')){
             // get image name
@@ -73,7 +71,8 @@ class ProductRepository  implements RepositoryInterface {
             $product->photo =  $filename;
 
         }
-
+        $product->title =  $params["title"];
+        $product->description =  $params["description"];
         $product->price =  intval($params["price"]);
         $product->old_price =  intval($params["old_price"]);
         $product->quantity =  intval($params["quantity"]);

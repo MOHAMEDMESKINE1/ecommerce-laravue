@@ -170,7 +170,7 @@ import Dashboard from '../Dashboard.vue';
 import Pagination from '../Pagination.vue';
 
 import { ref } from 'vue';
-import {showToast,errorToast,showConfirmation} from "../../toaster.js";
+import {successToast,errorToast,showConfirmation} from "../../toaster.js";
 
 // form inputs
 const product = ref({
@@ -188,7 +188,7 @@ const product = ref({
 
 
   function addedProduct() {
-      showToast('Order saved succefully!');
+      successToast('Order saved succefully!');
    
   }
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Product;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ProductRequest;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\Validator;
 use Exception;
 
 class ProductController extends Controller
@@ -69,10 +71,11 @@ class ProductController extends Controller
      
 
    }
-   public function store(Request $request){
+   public function store(ProductRequest $request){
 
       try {
-
+       
+        
          $products = $this->product->store($request->all());
          
          return response()->json($products);

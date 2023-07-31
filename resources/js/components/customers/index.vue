@@ -120,7 +120,7 @@
 import Dashboard from '../Dashboard.vue';
 import Pagination from '../Pagination.vue';
 
-import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import {successToast,errorToast,showConfirmation} from "../../toaster.js"
 import { ref } from 'vue';
 
   const customer = ref({
@@ -130,7 +130,7 @@ import { ref } from 'vue';
   })
 
   function addCustomer() {
-        showToast('Customer added succefully!');
+    successToast('Customer added succefully!');
     
     }
 async function  Confirmation() {

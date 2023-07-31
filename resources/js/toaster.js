@@ -1,7 +1,7 @@
 import { useToast } from 'vue-toastification';
 import Swal from 'sweetalert2';
 // const toast = useToast();
-export function  showToast(message,options = {}) {
+export function  successToast(message,options = {}) {
   const toast = useToast();
   toast.success(message, {
     timeout: 1500, // Duration in milliseconds (3 seconds)

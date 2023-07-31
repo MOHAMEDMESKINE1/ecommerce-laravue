@@ -90,12 +90,12 @@ import Dashboard from '../Dashboard.vue';import { ref } from 'vue';
 import Pagination from '../Pagination.vue';
 
 
-import {showToast,errorToast,showConfirmation} from "../../toaster.js"
+import {successToast,errorToast,showConfirmation} from "../../toaster.js"
   // form inputs
   const category = ref({ name: "T-Shirt", })
 
   function SuccessCategory() {
-      showToast('Category added succefully!');
+      successToast('Category added succefully!');
   
   }
   async function  Confirmation() {

@@ -21,6 +21,7 @@
         "moment": "^2.29.4",
         "sweetalert2": "^11.7.18",
         "v-pagination-3": "^0.1.7",
+        "vee-validate": "^4.5.8",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1",
         "vue-progressbar": "^0.7.5",
