@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Product;
 
+use Exception;
+use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\ProductRequest;
-use App\Models\Category;
-use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Support\Facades\Validator;
-use Exception;
+use App\Http\Requests\Product\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -54,6 +55,64 @@ class ProductController extends Controller
          ]);
       }
    }
+   public function search (Request $request){
+      
+      try {
+
+         $search_query =$request->input('query');
+
+         $product  = $this->product->search($search_query);
+         
+        if($product){
+         return response()->json($product);
+           
+
+        }else{
+            $products =$this->product->all();
+            
+             return response()->json($products);
+
+        }
+
+
+      } catch (Exception $ex) {
+         
+         return response()->json([
+            "ERROR ProductController.search : ".$ex->getMessage()
+         ]);
+      }
+     
+
+   }
+   public function filter (Request $request){
+      
+      try {
+
+         $filter_query =$request->input('filter_date');
+
+         $product  = $this->product->filterByDate($filter_query);
+         
+        if($product){
+         return response()->json($product);
+           
+
+        }else{
+            $products =$this->product->all();
+            
+             return response()->json($products);
+
+        }
+
+
+      } catch (Exception $ex) {
+         
+         return response()->json([
+            "ERROR ProductController.filter : ".$ex->getMessage()
+         ]);
+      }
+     
+
+   }
    public function edit ($id){
       
       try {
@@ -71,6 +130,7 @@ class ProductController extends Controller
      
 
    }
+  
    public function store(ProductRequest $request){
 
       try {

@@ -21,10 +21,10 @@
                                         </div>
                                         <!--  photo -->
                                         <div class="form-floating p-0 mb-3">
-                                        <input class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo"   type="file" @change="onImageChanged">
+                                        <input name="photo" class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo"   type="file" @change="onImageChanged">
                                         <label for="photo" class="fw-bold" >Photo </label>
                                         <div v-if="product.photo">
-                                          <img  :src="'storage/products/'+product.photo" class="me-2" alt="image"> {{product.title}}
+                                          <img  :src="'/storage/products/'+product.photo" class="me-2" :alt="product.title" > 
 
                                         </div>
                                         <img v-else src="assets/images/faces-clipart/pic-1.png" class="me-2" alt="image"> 
@@ -202,7 +202,7 @@ export default {
         // formdata.append('size',product.size)
         // formdata.append('color',product.color)
         // formdata.append('category_id',product.category_id)
-
+       
         await updateProduct(props.id);
       } catch (error) {
         // If an error occurs during update, handle it and set the "errors" ref

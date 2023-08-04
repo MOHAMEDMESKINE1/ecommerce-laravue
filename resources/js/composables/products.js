@@ -46,6 +46,44 @@ export default function useProducts(){
         });
 
     }
+    // search
+    const searchProduct  = async (query) => {
+      
+        await axios.get('/api/products/search/?query='+ query)
+        .then(response => {
+
+            products.value = response.data;
+           
+        })
+        .catch(e => {
+           
+            errors.value = error.response.data.errors;
+            console.log(e)
+           
+          
+        
+        });
+
+    }
+    // filterby date
+    const filterProduct  = async (query) => {
+      
+        await axios.get('/api/products/filter/?filter_date='+ query)
+        .then(response => {
+
+            products.value = response.data;
+           
+        })
+        .catch(e => {
+           
+            errors.value = error.response.data.errors;
+            console.log(e)
+           
+          
+        
+        });
+
+    }
     // add record
     const addProduct = async (data,id,attribute)=> {
 
@@ -82,9 +120,9 @@ export default function useProducts(){
     // update product
     const updateProduct  = async (id) => {
         errors.value = []
-        let config = {
-            headers : {"content-type":"multipart/from-data"}
-          }    
+        // let config = {
+        //     headers : {"content-type":"multipart/from-data"}
+        //   }    
         await axios.put(`/api/products/${id}`,product.value)
         .then(_ => {
             successToast('Product updated succefully!');
@@ -121,6 +159,8 @@ export default function useProducts(){
         products,
         product,
         errors,
+        searchProduct,
+        filterProduct,
         getProducts,
         getProduct,
         addProduct,

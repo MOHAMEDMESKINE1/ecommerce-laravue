@@ -17,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ProductController::class)->group(function(){
 
     Route::get('products','index');
+
     Route::get('products/edit/{id}','edit');
+
+    Route::get('products/search','search');
+
+    Route::get('products/filter','filter');
+
     Route::post('products/store','store');
+
     Route::put('products/{id}','update');
+
     Route::delete('products/{id}','delete');
 
     Route::get('categories','categories');

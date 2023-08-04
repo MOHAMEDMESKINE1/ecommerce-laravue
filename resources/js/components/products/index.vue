@@ -158,6 +158,19 @@
                               </button>
                             </div>
                             <h4 class="card-title text-info">Products List</h4>
+                            <div class="mt-4 d-flex justify-content-between">
+                              <div class="mb-3">
+                                <label for="" class="form-label">Search Product</label>
+                                <input type="text"
+                                  class="form-control w-75 shadow shadow-sm " name="query"  v-model="query"  @change="searchProduct()"  id="search" aria-describedby="helpId" placeholder="">
+                              </div>
+                              <!-- <div class="mb-3">
+                                <label for="" class="form-label">Filter Date</label>
+                              <input type="date"
+                                  class="form-control shadow shadow-sm " name="filter_date"  v-model="filter_date"  @change="filterProduct()"  id="search" aria-describedby="helpId" placeholder=""> 
+                                
+                              </div>  -->
+                            </div>
                             <div class="table-responsive">
                               <table class="table  table-bordered p-2 text-center">
                                 <thead>
@@ -168,6 +181,7 @@
                                     <th> Old Price  </th>
                                     <th> Quantity  </th>
                                     <th> Category  </th>
+                                    <th> Size  </th>
                                     <th> Created </th>
                                     <th> Last Updated </th>
                                     <th> Action </th>
@@ -193,6 +207,9 @@
                                       </td>
                                       <td>
                                         <h1 class="badge badge-gradient-primary   text-white">{{product.categories.name}}</h1>
+                                      </td>
+                                      <td>
+                                        <h1 class="badge badge-gradient-success   text-white">{{product.size}}</h1>
                                       </td>
                                       <td> {{formattedDate(product.created_at,'DD/MM/YYYY HH:mm')}}  </td>
                                       <td> {{formattedDate(product.updated_at,'DD/MM/YYYY HH:mm')}}  </td>
@@ -231,10 +248,9 @@
 <script setup>
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import Error from '../../layouts/Error.vue';
-
 import Dashboard from '../Dashboard.vue';
 import { onMounted } from '@vue/runtime-core';
-import { ref  } from 'vue';
+import { ref, watch  } from 'vue';
 import {successToast,errorToast,showConfirmation} from "../../toaster.js"
 import formattedDate from '../../helpers/index.js'
 
@@ -243,7 +259,14 @@ import useCategories from '../../composables/categories';
 
 
 // produtcs
-  const {products,errors,getProducts,addProduct,destroyProduct,getProduct} = useProducts();
+  const {products,errors,
+    getProducts,
+    addProduct,
+    destroyProduct,
+    getProduct,
+    searchProduct,
+    filterProduct
+  } = useProducts();
 // categories
   const {categories,getCategories} = useCategories();
 
@@ -262,14 +285,29 @@ import useCategories from '../../composables/categories';
   const category_id = ref(1);
   const size  = ref('');
   const color  = ref('');
+  const query  = ref(null);
+  const filter_date  = ref(null);
 
-
+// const formDate = ref("");
+function formatDateForBackend(dateStr) {
+      // Assuming dateStr is in the format 'DD/MM/YYYY HH:mm'
+      const [day, month, year, time] = filter_date.split(/[\/\s:]/);
+      return `${year}-${month}-${day} ${time}:00`;
+    }
   function onImageChanged(e) {
         console.log(e.target.files[0]);
         photo.value=e.target.files[0]
   }
  
+    watch(
+    () => query.value,(newValue) => {
+      searchProduct(newValue);
+    },
+    () => filter_date.value,(newValue) => {
+      filterProduct(newValue);
+    },
 
+  );
   function saveProduct() {
         let formdata = new FormData();
         formdata.append('title',title.value)

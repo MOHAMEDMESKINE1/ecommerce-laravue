@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,10 +18,58 @@ class ProductRepository  implements RepositoryInterface {
 
         return $this->product->latest()->with("categories")->orderBy("price","desc")->paginate(5);
     }
-    public function search($query){
+    public function search($query)
+    {
+        $products = $this->product
+        ->where(function ($productQuery) use ($query) {
 
+            $productQuery->where('title', 'like', '%' . $query . '%')
+                ->orWhere('size', 'like', '%' .  strtoupper($query) . '%');
+
+        })->orWhereHas('categories', function ($categoryQuery) use ($query) {
+            $categoryQuery->where('name', 'like', '%' . $query . '%');
+        })
+        ->with("categories")
+        ->paginate(5);
+        
+        
+        return $products ;
+        
     }
+    public function filterByDate($selectedDate)
+    {
+        $filteredDate = $this->product->whereDate('created_at',$selectedDate)->paginate(5);
+        // $products = $this->product->query();
+        // $dateFilter = $selectedDate;
 
+        // switch($dateFilter){
+        //     case 'today':
+        //         $this->product->whereDate('created_at',Carbon::today())->paginate(5);
+        //         break;
+        //     case 'yesterday':
+        //         $this->product->wheredate('created_at',Carbon::yesterday())->paginate(5);
+        //         break;
+        //     case 'this_week':
+        //         $this->product->whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->paginate(5);
+        //         break;
+        //     case 'last_week':
+        //         $this->product->whereBetween('created_at',[Carbon::now()->subWeek(),Carbon::now()])->paginate(5);
+        //         break;
+        //     case 'this_month':
+        //         $this->product->whereMonth('created_at',Carbon::now()->month)->paginate(5);
+        //         break;
+        //     case 'last_month':
+        //         $this->product->whereMonth('created_at',Carbon::now()->subMonth()->month)->paginate(5);
+        //         break;
+        //     case 'this_year':
+        //         $this->product->whereYear('created_at',Carbon::now()->year)->paginate(5);
+        //         break;
+        //     case 'last_year':
+        //         $this->product->whereYear('created_at',Carbon::now()->subYear()->year)->paginate(5);
+        //         break;                       
+        // }
+        return $filteredDate;
+    }
     function getById($id){
 
         return $this->product->find($id);
