@@ -39,35 +39,7 @@ class ProductRepository  implements RepositoryInterface {
     public function filterByDate($selectedDate)
     {
         $filteredDate = $this->product->whereDate('created_at',$selectedDate)->paginate(5);
-        // $products = $this->product->query();
-        // $dateFilter = $selectedDate;
-
-        // switch($dateFilter){
-        //     case 'today':
-        //         $this->product->whereDate('created_at',Carbon::today())->paginate(5);
-        //         break;
-        //     case 'yesterday':
-        //         $this->product->wheredate('created_at',Carbon::yesterday())->paginate(5);
-        //         break;
-        //     case 'this_week':
-        //         $this->product->whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->paginate(5);
-        //         break;
-        //     case 'last_week':
-        //         $this->product->whereBetween('created_at',[Carbon::now()->subWeek(),Carbon::now()])->paginate(5);
-        //         break;
-        //     case 'this_month':
-        //         $this->product->whereMonth('created_at',Carbon::now()->month)->paginate(5);
-        //         break;
-        //     case 'last_month':
-        //         $this->product->whereMonth('created_at',Carbon::now()->subMonth()->month)->paginate(5);
-        //         break;
-        //     case 'this_year':
-        //         $this->product->whereYear('created_at',Carbon::now()->year)->paginate(5);
-        //         break;
-        //     case 'last_year':
-        //         $this->product->whereYear('created_at',Carbon::now()->subYear()->year)->paginate(5);
-        //         break;                       
-        // }
+        
         return $filteredDate;
     }
     function getById($id){
@@ -109,13 +81,13 @@ class ProductRepository  implements RepositoryInterface {
         $product = $this->getById($id);
 
         $filename  = null;
-    
+        $file= request()->file('photo');
 
          if(request()->hasFile('photo')){
             // get image name
-            $filename = time().".".request()->photo->getClientOriginalExtension();
+            $filename = time().".".$file->getClientOriginalExtension();
             //  store image in public folder
-            request()->photo->move(public_path('storage/products'),$filename);
+           $file->move(public_path('storage/products'),$filename);
           
             $product->photo =  $filename;
 
@@ -127,6 +99,7 @@ class ProductRepository  implements RepositoryInterface {
         $product->quantity =  intval($params["quantity"]);
         $product->size =  $params["size"];
         $product->color =  $params["color"];
+    
         $product->category_id =  $params["category_id"];
 
         $product->save();

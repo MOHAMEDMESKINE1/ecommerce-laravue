@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\Product\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,18 @@ Route::controller(ProductController::class)->group(function(){
     Route::delete('products/{id}','delete');
 
     Route::get('categories','categories');
+
+});
+
+Route::controller(ContactController::class)->group(function(){
+
+    Route::get('contacts','index');
+
+    Route::post('contacts/store','store');
+
+
+    Route::delete('contacts/{id}','delete');
+
 
 });
 

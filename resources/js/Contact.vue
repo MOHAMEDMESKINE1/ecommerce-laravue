@@ -9,30 +9,30 @@
             <div class="col-lg-7 mb-5">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form name="form"  ref="form" method="post" id="contactForm" novalidate="novalidate">
                         <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name"
+                            <input type="text" class="form-control" name="name" v-model="contact.name" id="name" placeholder="Your Name"
                                 required="required" data-validation-required-message="Please enter your name" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email"
+                            <input type="email" class="form-control" name="email" v-model="contact.email" id="email" placeholder="Your Email"
                                 required="required" data-validation-required-message="Please enter your email" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject"
+                            <input type="text" class="form-control" name="subject" v-model="contact.subject" id="subject" placeholder="Subject"
                                 required="required" data-validation-required-message="Please enter a subject" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <textarea class="form-control" rows="6" id="message" placeholder="Message"
+                            <textarea class="form-control" rows="6" name="message" v-model="contact.message" id="message" placeholder="Message"
                                 required="required"
                                 data-validation-required-message="Please enter your message"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
+                            <button @click.prevent="addContact()" class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
                                 Message</button>
                         </div>
                     </form>
@@ -63,4 +63,34 @@
 <script setup>
 
 import Main from './layouts/Main.vue'
+
+import useContacts from './composables/contacts';
+import { reactive, ref } from 'vue';
+
+import { warningToast} from "./toaster.js"
+
+const {storeContact} = useContacts();
+
+const contact =reactive( {
+    name : '',
+    email : '',
+    subject : '',
+    message : '',
+
+});
+   
+    const addContact  = () => {
+        if(contact.name !=="" && contact.email!==""&& contact.subject!==""&& contact.message!==""){
+            storeContact(contact)
+            resetForm();
+        }else{
+            warningToast("please fill all Fiels ! ")
+        }
+      
+    }
+    const resetForm = () => {
+        form.reset();
+      
+    }
+   
 </script>

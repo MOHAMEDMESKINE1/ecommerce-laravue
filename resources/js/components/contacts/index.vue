@@ -12,8 +12,8 @@
               
             </div>
             <div class="row">
-                <div class="col-xl-6 col-md-6 col-6 ">
-                    <div class="card">
+                <div class="col-xl-6 col-md-6 col-6 " v-for="contact in contacts.data">
+                    <div class="card" >
                         <div class="card-body">
                             <div class="dropdown float-end">
                                 <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-horizontal-rounded"></i></a>
@@ -22,8 +22,8 @@
                             <div class="d-flex align-items-center">
                                 <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
                                 <div class="flex-1 ms-3">
-                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Phyllis Gatlin</a></h5>
-                                    <span class="badge badge-soft-success mb-0">Full Stack Developer</span>
+                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark" v-text="contact.name"></a></h5>
+                                    <span class="badge badge-soft-success mb-0" v-text="contact.subject"></span>
                                 </div>
                             </div>
                             <div class="mt-3 pt-1">
@@ -38,32 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-md-6 col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-horizontal-rounded"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
-                                <div class="flex-1 ms-3">
-                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Phyllis Gatlin</a></h5>
-                                    <span class="badge badge-soft-success mb-0">Full Stack Developer</span>
-                                </div>
-                            </div>
-                            <div class="mt-3 pt-1">
-                                <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i> 070 2860 5375</p>
-                                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary"></i> PhyllisGatlin@spy.com</p>
-                                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i> 52 Ilchester MYBSTER 9WX</p>
-                            </div>
-                            <div class="d-flex gap-2 pt-4">
-                                <button type="button" class="btn btn-soft-primary btn-sm w-50"><i class="bx bx-user me-1"></i> Profile</button>
-                                <button type="button" class="btn btn-primary btn-sm w-50"><i class="bx bx-message-square-dots me-1"></i> Contact</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
                
             </div>
             <!-- pagination -->
@@ -78,8 +53,16 @@
 <script setup>
 import Dashboard from '../Dashboard.vue';
 import Pagination from '../Pagination.vue';
+import { onMounted } from '@vue/runtime-core';
+
+import useContacts from '../../composables/contacts.js';
 
 
+const {contacts,getContacts} = useContacts();
+
+    onMounted(() => {
+        getContacts()
+    })
 </script>
 
 <style scoped>

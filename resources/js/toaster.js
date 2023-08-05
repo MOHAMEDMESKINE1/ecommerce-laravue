@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export function  successToast(message,options = {}) {
   const toast = useToast();
   toast.success(message, {
-    timeout: 1500, // Duration in milliseconds (3 seconds)
+    timeout: 2000, // Duration in milliseconds (3 seconds)
     closeOnClick: true, // Close the toast when clicked
     pauseOnFocusLoss: false, // Continue showing toast even if the window loses focus
     pauseOnHover: true, // Pause the toast duration when hovering over it
@@ -24,6 +24,20 @@ export function  errorToast(message,options = {} ) {
     draggable: true, // Allow the user to drag the toast
     hideProgressBar: false, // Show the progress bar while the toast is visible
     closeButton: 'button', // Custom close button selector
+    ...options,
+  });
+}
+export function  warningToast(message,options = {} ) {
+  const toast = useToast();
+  toast.warning(message, {
+    timeout: 2000, // Duration in milliseconds (3 seconds)
+    closeOnClick: true, // Close the toast when clicked
+    pauseOnFocusLoss: false, // Continue showing toast even if the window loses focus
+    pauseOnHover: true, // Pause the toast duration when hovering over it
+    draggable: true, // Allow the user to drag the toast
+    hideProgressBar: false, // Show the progress bar while the toast is visible
+    closeButton: 'button',
+    positionClass: "toast-bottom-right", // Custom close button selector
     ...options,
   });
 }
