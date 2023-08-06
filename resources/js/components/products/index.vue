@@ -288,12 +288,7 @@ import useCategories from '../../composables/categories';
   const query  = ref(null);
   const filter_date  = ref(null);
 
-// const formDate = ref("");
-function formatDateForBackend(dateStr) {
-      // Assuming dateStr is in the format 'DD/MM/YYYY HH:mm'
-      const [day, month, year, time] = filter_date.split(/[\/\s:]/);
-      return `${year}-${month}-${day} ${time}:00`;
-    }
+
   function onImageChanged(e) {
         console.log(e.target.files[0]);
         photo.value=e.target.files[0]

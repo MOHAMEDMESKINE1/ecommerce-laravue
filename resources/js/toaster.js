@@ -37,7 +37,6 @@ export function  warningToast(message,options = {} ) {
     draggable: true, // Allow the user to drag the toast
     hideProgressBar: false, // Show the progress bar while the toast is visible
     closeButton: 'button',
-    positionClass: "toast-bottom-right", // Custom close button selector
     ...options,
   });
 }

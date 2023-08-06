@@ -38,6 +38,7 @@ Route::controller(ProductController::class)->group(function(){
 Route::controller(ContactController::class)->group(function(){
 
     Route::get('contacts','index');
+    Route::get('contacts/count','count');
 
     Route::post('contacts/store','store');
 

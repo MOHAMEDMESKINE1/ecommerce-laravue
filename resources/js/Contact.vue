@@ -9,31 +9,41 @@
             <div class="col-lg-7 mb-5">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form name="form"  ref="form" method="post" id="contactForm" novalidate="novalidate">
-                        <div class="control-group">
-                            <input type="text" class="form-control" name="name" v-model="contact.name" id="name" placeholder="Your Name"
-                                required="required" data-validation-required-message="Please enter your name" />
-                            <p class="help-block text-danger"></p>
+                    <form name="form"   method="post" id="contactForm">
+                        <div class="control-group ">
+                            <input type="text"  class="form-control mb-2" name="name" v-model="contact.name" id="name" placeholder="Your Name"
+                                required  />
+                            <Error :errors="errors.name"    />
                         </div>
                         <div class="control-group">
                             <input type="email" class="form-control" name="email" v-model="contact.email" id="email" placeholder="Your Email"
-                                required="required" data-validation-required-message="Please enter your email" />
-                            <p class="help-block text-danger"></p>
+                                required  />
+                            <!-- <p class="help-block text-danger"></p> -->
+                            <Error  :errors="errors.email" class="help-block text-danger"/>
+
+                        </div>
+                        <div class="control-group">
+                            <input type="number" class="form-control" name="phone" v-model="contact.phone" id="email" placeholder="Your Email"
+                                required  />
+                            <!-- <p class="help-block text-danger"></p> -->
+                            <Error  :errors="errors.phone" class="help-block text-danger"/>
+
                         </div>
                         <div class="control-group">
                             <input type="text" class="form-control" name="subject" v-model="contact.subject" id="subject" placeholder="Subject"
-                                required="required" data-validation-required-message="Please enter a subject" />
+                               />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
                             <textarea class="form-control" rows="6" name="message" v-model="contact.message" id="message" placeholder="Message"
-                                required="required"
-                                data-validation-required-message="Please enter your message"></textarea>
+                                required
+                               ></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
                             <button @click.prevent="addContact()" class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                                Message</button>
+                                Message
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -63,14 +73,14 @@
 <script setup>
 
 import Main from './layouts/Main.vue'
-
+// import { Form, Field, ErrorMessage } from 'vee-validate';
 import useContacts from './composables/contacts';
 import { reactive, ref } from 'vue';
+import Error from './layouts/Error.vue';
 
 import { warningToast} from "./toaster.js"
 
-const {storeContact} = useContacts();
-
+const {storeContact,errors} = useContacts();
 const contact =reactive( {
     name : '',
     email : '',
@@ -80,14 +90,28 @@ const contact =reactive( {
 });
    
     const addContact  = () => {
-        if(contact.name !=="" && contact.email!==""&& contact.subject!==""&& contact.message!==""){
+        if(contact.name  && contact.email  && contact.subject  && contact.message ){
             storeContact(contact)
             resetForm();
         }else{
-            warningToast("please fill all Fiels ! ")
+            warningToast("please fill all Fiels ! ",{  position: "top-center", })
         }
       
+        // if(contact.name !=="" && contact.email!==""&& contact.subject!==""&& contact.message!==""){
+        //     storeContact(contact)
+        //     resetForm();
+        // }else{
+        //     warningToast("please fill all Fiels ! ",{  position: "top-center", })
+        // }
+      
     }
+    // const validateName= (value) =>{
+    //     if (!value) {
+    //     //    console.log( 'This field is required');
+    //        return 'Please enter your name';
+    //     }
+    //     return true;
+    // }
     const resetForm = () => {
         form.reset();
       

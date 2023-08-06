@@ -16,7 +16,11 @@ class ContactRepository  implements RepositoryInterface {
 
     public function all(){
 
-        return $this->contact->latest()->orderBy("name","desc")->paginate();
+        return $this->contact->latest()->orderBy("name","desc")->paginate(5);
+    }
+    public function count(){
+
+        return $this->contact->count();
     }
     public function search($query){
 
