@@ -157,7 +157,7 @@
                                 Add Product
                               </button>
                             </div>
-                            <h4 class="card-title text-info">Products List</h4>
+                            <h4 class="card-title text-info">Products List ({{ products.total }})</h4>
                             <div class="mt-4 d-flex justify-content-between">
                               <div class="mb-3">
                                 <label for="" class="form-label">Search Product</label>
