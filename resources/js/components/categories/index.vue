@@ -33,6 +33,8 @@
 </div>
 <!-- add Category -->
 
+
+
         <Dashboard>
 
             <div class="row ">
@@ -66,7 +68,7 @@
                                     <td>{{formattedDate(category.updated_at,'DD/MM/YYYY HH:mm')}}  </td>
                                     <td> 
                                       <div class="">
-                                        <a href="#"  class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                        <router-link   :to="{name:'categories.edit',params:{id:category.id}}" class=" mdi mdi-grease-pencil fs-4  mx-2"></router-link>
                                         <a href="#" @click.prevent="ConfirmationDelete(category.id)" class="mdi mdi-delete-forever fs-4 text-danger"></a>
                                       </div>
                                     </td>
@@ -102,15 +104,27 @@ import useCategories from '../../composables/categories.js';
 import {errorToast,showConfirmation, successToast} from "../../toaster.js"  
 // category
   const title =ref("");
-  const {categories,errors,getCategories,addCategory,destroyCategory} = useCategories();
+  const {
+    categories,
+    getCategory,
+    getCategories,
+    addCategory,
+    destroyCategory
+  } = useCategories();
 
   onMounted(()=> {
     getCategories()
+   
   })
   
 
+  // getCategory(id)
+  // function editCategory () {
+  //     updateCategory(category)
+  // }
   function storeCategory() {
       if(title.value!=="" ){
+      
         addCategory({title:title.value},"#addCategory",".modal-backdrop")
 
       }else{
@@ -118,6 +132,7 @@ import {errorToast,showConfirmation, successToast} from "../../toaster.js"
       }
   
   }
+
   async function  ConfirmationDelete(id) {
       const confirmed = await showConfirmation(
         'Are you sure?',

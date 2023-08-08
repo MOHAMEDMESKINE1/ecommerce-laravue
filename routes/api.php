@@ -53,9 +53,9 @@ Route::controller(CategoryController::class)->group(function(){
 
     Route::get('categories','index');
 
-    Route::get('categories/edit/{id}','edit');
+    Route::get('categories/{id}','edit');
 
-    Route::put('categories/update/{id}','update');
+    Route::put('categories/{id}','update');
 
 
     Route::post('categories/store','store');

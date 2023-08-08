@@ -6,7 +6,7 @@ import Orders_Details from '../components/orders/Details.vue';
 import Statistics from '../components/statistics/index.vue';
 import Products from '../components/products/index.vue';
 import Edit from '../components/products/Edit.vue';
-
+import EditCateory from '../components/categories/Edit.vue';
 import Customers from '../components/customers/index.vue';
 import Categories from '../components/categories/index.vue';
 import Payments from '../components/payments/index.vue';
@@ -98,6 +98,12 @@ const routes = [
         path:'/categories',
         name:'categories',
         component : Categories
+    },
+    {
+        path:'/categories/edit/:id',
+        name:'categories.edit',
+        component : EditCateory,
+        props : true,
     },
     {
         path:'/payments',

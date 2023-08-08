@@ -116,7 +116,7 @@
             <div class="form-floating mb-3">
               <select  name="category_id" id="category" v-model="category_id" class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary">  select category</option>
-               <option v-for="category in categories" :value='category.id' :key="category.id">
+               <option v-for="category in categories.data" :value='category.id '  :key="category.id">
                 {{category.name}}
               </option>
             
@@ -206,7 +206,7 @@
                                         <h1 class="badge badge-gradient-success   text-white">{{product.quantity}}</h1>
                                       </td>
                                       <td>
-                                        <h1 class="badge badge-gradient-primary   text-white">{{product.categories.name}}</h1>
+                                        <h1 class="badge badge-gradient-primary   text-white">{{product.categories.title}}</h1>
                                       </td>
                                       <td>
                                         <h1 class="badge badge-gradient-success   text-white">{{product.size}}</h1>
@@ -263,7 +263,6 @@ import useCategories from '../../composables/categories';
     getProducts,
     addProduct,
     destroyProduct,
-    getProduct,
     searchProduct,
     filterProduct
   } = useProducts();
@@ -272,7 +271,6 @@ import useCategories from '../../composables/categories';
 
   onMounted(() => {
     getProducts();
-    getProduct()
     getCategories();
   });
   // form inputs

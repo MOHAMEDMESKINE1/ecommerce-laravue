@@ -24,7 +24,7 @@ export default function useProducts(){
             console.log(e)
            
           
-        
+       
         });
 
     }
@@ -119,10 +119,9 @@ export default function useProducts(){
 
     // update product
     const updateProduct  = async (id) => {
+
         errors.value = []
-        // let config = {
-        //     headers : {"content-type":"multipart/from-data"}
-        //   }    
+        
         await axios.put(`/api/products/${id}`,product.value)
         .then(_ => {
             successToast('Product updated succefully!');

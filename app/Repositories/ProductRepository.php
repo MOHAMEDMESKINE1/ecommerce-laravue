@@ -16,7 +16,7 @@ class ProductRepository  implements RepositoryInterface {
 
     public function all(){
 
-        return $this->product->latest()->with("categories")->orderBy("price","desc")->paginate(5);
+        return $this->product->latest()->with("categories")->paginate(5);
     }
     public function search($query)
     {
@@ -27,7 +27,7 @@ class ProductRepository  implements RepositoryInterface {
                 ->orWhere('size', 'like', '%' .  strtoupper($query) . '%');
 
         })->orWhereHas('categories', function ($categoryQuery) use ($query) {
-            $categoryQuery->where('name', 'like', '%' . $query . '%');
+            $categoryQuery->where('title', 'like', '%' . $query . '%');
         })
         ->with("categories")
         ->paginate(5);

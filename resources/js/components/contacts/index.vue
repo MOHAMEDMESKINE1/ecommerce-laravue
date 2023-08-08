@@ -12,7 +12,7 @@
               
             </div>
             <div class="row">
-                <div class="col-xl-6 col-md-6 col-6 " v-for="contact in contacts.data">
+                <div class="col-6  col-md-6  " v-for="contact in contacts.data">
                     <div class="card" >
                         <div class="card-body">
                             

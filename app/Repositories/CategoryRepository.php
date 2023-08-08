@@ -37,7 +37,8 @@ class CategoryRepository  implements RepositoryInterface {
 
         $category = $this->getById($id);
 
-        $category->update($params);
+       $category->title = $params["title"];
+       $category->save();
     }
     public function delete($id){
 
