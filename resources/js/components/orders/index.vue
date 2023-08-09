@@ -126,20 +126,26 @@
                                 </tr>
                               </thead>
                               <tbody>
+                              <template v-for="order in orders.data" :key="order.id">
                                 <tr>
                                   <td>
-                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> Customer name
+                                    <!-- <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> Customer name -->
+                                    <span class="text-primary fw-bold"> {{ order.user.name }}</span>
                                   </td>
                                   <td>
-                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> Product description
+                                    <img  :src="'storage/products/'+order.products.photo" class="me-2" alt="image"> {{product.title}}
                                   </td>
-                                  <td>5 </td>
-                                  <td>5 $</td>
-                                  <td>25 $</td>
-                                  <td> <span class="badge badge-gradient-success p-1  text-white">paid</span></td>
-                                  <td> <span class="badge badge-gradient-danger p-1  text-white">cancelled</span></td>
-                                  <td> Dec 5, 2017 </td>
-                                  <td> Dec 5, 2017  </td>
+                                  <td>{{order.quantity}} $</td>
+                                  <td>{{order.price}} $</td>
+                                  <td>{{order.total}} $</td>
+                                  <td> 
+
+                                    <span v-if="order.payment === 0" class="badge badge-gradient-danger p-1  text-white"> Not Paid</span>
+                                    <span v-else  class="badge badge-gradient-success p-1  text-white">  Paid</span>
+                                  </td>
+                                  <td> <span class="badge badge-gradient-primary p-1  text-white">{{order.status}}</span></td>
+                                  <td>{{formattedDate(order.created_at,'DD/MM/YYYY HH:mm')}}</td>
+                                  <td>{{formattedDate(order.updated_at,'DD/MM/YYYY HH:mm')}}</td>
                                   <td> 
                                     <div   class="d-flex justify-content-between">
                                       
@@ -150,6 +156,7 @@
                                     </div>
                                   </td>
                                 </tr>
+                              </template>
                                 
                               </tbody>
                             </table>
@@ -159,7 +166,13 @@
                     </div>
       </div>
       <!-- recents orders -->
-      <Pagination></Pagination>
+       <!-- pagination -->
+       <Bootstrap5Pagination
+                              :data="orders"
+                              @pagination-change-page="getOrders"
+          />
+          
+        <!-- pagination -->
       </Dashboard>
   </div>
 
@@ -167,11 +180,17 @@
 </template>
 <script setup>
 import Dashboard from '../Dashboard.vue';
-import Pagination from '../Pagination.vue';
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+import formattedDate from '../../helpers/index'
 
 import { ref } from 'vue';
-import {successToast,errorToast,showConfirmation} from "../../toaster.js";
+import { onMounted } from '@vue/runtime-core';
 
+import {successToast,errorToast,showConfirmation} from "../../toaster.js";
+import useOrders from '../../composables/orders';
+
+
+const {orders ,getOrders} = useOrders();
 // form inputs
 const product = ref({
     product: "",
@@ -185,7 +204,9 @@ const product = ref({
   })
 // 
 
-
+onMounted(() => {
+  getOrders();
+}),
 
   function addedProduct() {
       successToast('Order saved succefully!');

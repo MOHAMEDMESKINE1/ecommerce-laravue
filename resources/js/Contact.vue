@@ -11,30 +11,38 @@
                     <div id="success"></div>
                     <form name="form"   method="post" id="contactForm">
                         <div class="control-group ">
+                            <label for="">Name : </label>
                             <input type="text"  class="form-control mb-2" name="name" v-model="contact.name" id="name" placeholder="Your Name"
                                 required  />
                             <Error :errors="errors.name"    />
+                           
                         </div>
-                        <div class="control-group">
+                        <div class="control-group mb-2">
+                            <label for="">Email : </label>
                             <input type="email" class="form-control" name="email" v-model="contact.email" id="email" placeholder="Your Email"
                                 required  />
                             <!-- <p class="help-block text-danger"></p> -->
                             <Error  :errors="errors.email" class="help-block text-danger"/>
 
                         </div>
-                        <div class="control-group">
-                            <input type="number" class="form-control" name="phone" v-model="contact.phone" id="email" placeholder="Your Email"
+                        <div class="control-group mb-2">
+                            <label for="">Phone : </label>
+                            <input type="number" class="form-control" name="phone" v-model="contact.phone" id="phone" placeholder="+212 00 00 00 00"
                                 required  />
                             <!-- <p class="help-block text-danger"></p> -->
                             <Error  :errors="errors.phone" class="help-block text-danger"/>
 
                         </div>
-                        <div class="control-group">
+                        <div class="control-group mb-2">
+                            <label for="">Subject : </label>
+
                             <input type="text" class="form-control" name="subject" v-model="contact.subject" id="subject" placeholder="Subject"
                                />
                             <p class="help-block text-danger"></p>
                         </div>
-                        <div class="control-group">
+                        <div class="control-group mb-2">
+                            <label for="">Message : </label>
+
                             <textarea class="form-control" rows="6" name="message" v-model="contact.message" id="message" placeholder="Message"
                                 required
                                ></textarea>
@@ -83,6 +91,7 @@ import { warningToast} from "./toaster.js"
 const {storeContact,errors} = useContacts();
 const contact =reactive( {
     name : '',
+    phone:'',
     email : '',
     subject : '',
     message : '',

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,25 @@ Route::controller(CategoryController::class)->group(function(){
 
 
     Route::delete('categories/{id}','delete');
+
+
+});
+Route::controller(OrderController::class)->group(function(){
+
+    Route::get('orders','index');
+
+    Route::get('orders/{id}','edit');
+    
+    Route::get('orders/search','search');
+
+
+    Route::put('orders/{id}','update');
+
+
+    Route::post('orders/store','store');
+
+
+    Route::delete('orders/{id}','delete');
 
 
 });

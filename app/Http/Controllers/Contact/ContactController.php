@@ -47,10 +47,7 @@ class ContactController extends Controller
     
     public function store(ContactRequest $request){
         try {
-            $request->validate([
-               "title"=>"required"
-            ]);
-
+           
             $products =$this->contact->store($request->all());
            
            return response()->json($products);

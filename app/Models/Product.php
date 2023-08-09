@@ -30,7 +30,7 @@ class Product extends Model
     }
     public function orders()
     {
-        return $this->belongsToMany(Order::class,'order_id');
+        return $this->hasMany(Order::class,'order_id');
     }
     public function reviews()
     {
