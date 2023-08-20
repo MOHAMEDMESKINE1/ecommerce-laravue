@@ -15,9 +15,10 @@ class CategoryRepository  implements RepositoryInterface {
     }
 
     public function all(){
-
-        return $this->category->latest()->orderBy("title","desc")->paginate(3);
+        $categories  =  $this->category->latest()->orderBy("title","desc")->paginate(3);
+        return $categories ;
     }
+        
     public function search($query){
 
     }

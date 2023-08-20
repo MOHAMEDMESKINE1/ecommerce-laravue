@@ -116,9 +116,10 @@ const routes = [
         component : PaymentsDetails
     },
     {
-        path:'/orders_details',
-        name:'orders_details',
-        component : Orders_Details
+        path:'/orders_details/:id',
+        name:'order.details',
+        component : Orders_Details,
+        props:true,
     },
     {
         path:'/contacts',

@@ -17,11 +17,13 @@ class OrderRepository  implements RepositoryInterface {
 
     public function all(){
 
-        return $this->order->latest()->with(["user","products","payments"])->paginate(2);
+        return $this->order->with(["user","products","payments"])->paginate(2);
     }
     function getById($id){
 
-        return $this->order->find($id);
+        // return $this->order->find($id);
+        $order  = $this->order->with(["user","products"])->findOrFail($id);
+        return $order ; 
     }
 
     public function search($query)
@@ -29,7 +31,7 @@ class OrderRepository  implements RepositoryInterface {
         $orders = $this->order
         ->where(function ($orderQuery) use ($query) {
 
-            $orderQuery->where('payment', 'like', '%' . $query . '%');
+            $orderQuery->where('payment','=',$query);
 
         })->orWhereHas('user', function ($categoryQuery) use ($query) {
             $categoryQuery->where('name', 'like', '%' . $query . '%');
@@ -56,8 +58,8 @@ class OrderRepository  implements RepositoryInterface {
         $this->order->total = intval($params["quantity"]) * intval($params["price"])   ;
         $this->order->payment =  $params["payment"];
         $this->order->status =  $params["status"];
-        $this->order->user_id =  $params["user_id"];
-        $this->order->product_id =  $params["product_id"];
+        $this->order->user_id =  $params["customer"];
+        $this->order->product_id =  $params["product"];
 
         $this->order->save();
 

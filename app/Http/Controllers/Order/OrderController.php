@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Order;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\CustomerRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\ProductRepository;
@@ -12,21 +13,39 @@ use App\Repositories\ProductRepository;
 class OrderController extends Controller
 {
     public $product;
-    public $payment;
+    public $customer;
     public $order;
  
  
-     public function __construct(ProductRepository $productRepository,PaymentRepository $paymentRepository,OrderRepository $orderRepository) {
+     public function __construct(ProductRepository $productRepository,CustomerRepository $customerRepository,OrderRepository $orderRepository) {
  
        $this->product = $productRepository;
-       $this->payment = $paymentRepository;
+       $this->customer = $customerRepository;
        $this->order = $orderRepository;
     }
     public function index()
     {
         $orders  = $this->order->all();
-
+       
+         // $data = [
+         //    "orders"=>$orders,
+         //    "customers"=>$customers,
+         // ];
         return response()->json($orders);
+    }
+    public function customers()
+    {
+       
+        $customers  = $this->customer->all();
+        
+        return response()->json($customers);
+    }
+    public function products()
+    {
+       
+        $products  = $this->product->all();
+        
+        return response()->json($products);
     }
     public function search (Request $request){
       

@@ -20,6 +20,7 @@ class Order extends Model
         'user_id',
         'product_id',
     ];
+    // protected $guarded = [""];
     public function products()
     {
         return $this->belongsTo(Product::class,'product_id');
@@ -27,7 +28,7 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
     public function payments()
     {

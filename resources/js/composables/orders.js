@@ -5,9 +5,12 @@ import {useRouter} from "vue-router";
 
 export default function useOrders(){
     const orders = ref([]);
+    const customers = ref([]);
+    const products = ref([]);
     const order = ref('');
     const errors = ref([]);
     const router = useRouter();
+    
     const getOrders  = async (page=1) => {
         await axios.get("/api/orders?page="+page)
         .then(response => {
@@ -17,11 +20,29 @@ export default function useOrders(){
         .catch(err => console.log(err));
 
     }
+    const getCustomers = async () => {
+        await axios.get("/api/orders/customers")
+        .then(response => {
+            customers.value = response.data
+            console.log(response.data);
+        } )
+        .catch(err => console.log(err));
+
+    }
+    const getProducts = async () => {
+        await axios.get("/api/orders/products")
+        .then(response => {
+            products.value = response.data
+            console.log(response.data);
+        } )
+        .catch(err => console.log(err));
+
+    }
     const getOrder = async (id) => {
       
-        await axios.get(`/api/orders/${id}`)
+        await axios.get(`/api/orders/edit/${id}`)
         .then(response => {
-        //    console.log( response.data);
+           console.log( response.data);
          
             order.value = response.data
           
@@ -101,6 +122,8 @@ export default function useOrders(){
     }
     return {
         orders,
+        customers,
+        products,
         errors,
         order,
         addOrder,
@@ -108,6 +131,8 @@ export default function useOrders(){
         getOrders,
         getOrder,
         updateOrder,
+        getCustomers,
+        getProducts
     }
 
 } 

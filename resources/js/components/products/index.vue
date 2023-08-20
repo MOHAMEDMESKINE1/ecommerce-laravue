@@ -115,7 +115,7 @@
             <!--  category -->
             <div class="form-floating mb-3">
               <select  name="category_id" id="category" v-model="category_id" class="form-select shadow-none border border-2" >
-                <option selected class="text-secondary">  select category</option>
+                <option selected class="text-black">  select category</option>
                <option v-for="category in categories.data" :value='category.id '  :key="category.id">
                 {{category.name}}
               </option>
@@ -193,12 +193,17 @@
                                     <tr>
                                       <td>
                                         <div v-if="product.photo">
-                                          <img  :src="'storage/products/'+product.photo" class="me-2" alt="image"> {{product.title}}
+                                          <img  :src="'storage/products/'+product.photo" class="me-2" alt="image">
+                                          <p> {{product.title}}</p>
+                                        </div>
+                                        <div v-else>
+                                          <img  src="assets/images/faces-clipart/pic-1.png" class="me-2" alt="image"> 
+                                          <p> {{product.title}}</p>
+
 
                                         </div>
-                                        <img v-else src="assets/images/faces-clipart/pic-1.png" class="me-2" alt="image"> 
-
                                       </td>
+                                    
                                       <td> {{product.description}}</td>
                                       <td> {{product.price}}</td>
                                       <td class="text-decoration-line-through text-danger fw-bold"> {{product.old_price}} </td>

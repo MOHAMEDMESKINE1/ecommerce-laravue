@@ -1,13 +1,12 @@
 <template>
-    <div>
+    <div  style="background-color: #eee;">
 
-        <Dashboard>
-            <div class="container">
+        <!-- <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <router-link to="/orders">
-                            <span class="card-title text-primary text-muted fw-bold ms-2">Orders List (834)</span>
+                            <span class="card-title text-primary text-muted fw-bold ms-2">Orders Details</span>
 
                        </router-link>
                     </div>
@@ -23,10 +22,13 @@
                                 <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
                             </div>
                             <div class="d-flex align-items-center">
-                                <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
+                                <div >
+                                    <img v-if="order.products &&  order.products.photo"  :src="'/storage/products/'+order.products.photo" class="me-2" :alt="order.products.title">
+                                    
+                                </div>
                                 <div class="flex-1 ms-3">
-                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Phyllis Gatlin</a></h5>
-                                    <span class="badge badge-soft-success mb-0">Full Stack Developer</span>
+                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ order.products && order.products.title }}</a></h5>
+                                    <span class="text-danger mb-0">Ordered By : <strong>{{ order.user && order.user.name }}</strong></span>
                                 </div>
                             </div>
                             <div class="mt-3 pt-1">
@@ -41,46 +43,164 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-md-6 col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="dropdown float-end">
-                                <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-horizontal-rounded"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
-                                <div class="flex-1 ms-3">
-                                    <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Phyllis Gatlin</a></h5>
-                                    <span class="badge badge-soft-success mb-0">Full Stack Developer</span>
-                                </div>
-                            </div>
-                            <div class="mt-3 pt-1">
-                                <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i> 070 2860 5375</p>
-                                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary"></i> PhyllisGatlin@spy.com</p>
-                                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i> 52 Ilchester MYBSTER 9WX</p>
-                            </div>
-                            <div class="d-flex gap-2 pt-4">
-                                <button type="button" class="btn btn-soft-primary btn-sm w-50"><i class="bx bx-user me-1"></i> Profile</button>
-                                <button type="button" class="btn btn-primary btn-sm w-50"><i class="bx bx-message-square-dots me-1"></i> Contact</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
             </div>
-            <!-- pagination -->
-            <Pagination></Pagination>
-             <!-- pagination -->
-        </div>
-        </Dashboard>
+          
+        </div> -->
+
+        <section>
+                <div class="container py-5  ">
+                    <div class="row">
+                    <div class="col-md-12 col-lg-4 mb-4 mb-lg-0 mx-auto">
+                        <div class="card " >
+                        <div class="d-flex justify-content-between p-3">
+                            <p class="lead mb-0"><strong class="text-muted">{{ order.products && order.products.title }}</strong></p>
+
+                        <div
+                            class="bg-warning rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 fw-bold display-7 small"> {{ order.products && order.products.size }}</p>
+                            </div>
+                        </div>
+                        <img v-if="order.products &&  order.products.photo"  :src="'/storage/products/'+order.products.photo" :alt="order.products.title" class="card-img-top" alt="Laptop" />
+                        <div class="d-flex  justify-content-between ">
+                            <p class="small mx-3 ">Ordered By : <strong class="text-success mt-2">{{ order.user && order.user.name }}</strong></p>
+                            <p class="small mx-auto">Description : <br> <strong class="text-success mt-2">{{ order.products && order.products.description}}</strong></p>
+
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex  justify-content-between">
+                            
+                            <p class="small ">Old Price : <s class="text-danger"> {{ order.products && order.products.old_price }} $</s></p>
+                            <h5 class="text-dark mb-0">Price : {{ order.products && order.products.price }} $</h5>
+
+                            </div>
+
+                            <div class="d-flex  justify-content-between mb-2">
+                            <p class="text-muted mb-0">Color: <span class="fw-bold">{{ order.products && order.products.color }}</span></p>
+                            <p class="text-muted mb-0  ">Availabe: <span class="fw-sm">{{ order.products && order.products.quantity }}</span></p>
+                            
+                            </div>
+                          
+                           
+                        </div>
+                        </div>
+                    </div>
+                        <!-- <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                            <div class="card">
+                            <div class="d-flex justify-content-between p-3">
+                                <p class="lead mb-0">Today's Combo Offer</p>
+                                <div
+                                class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                                style="width: 35px; height: 35px;">
+                                <p class="text-white mb-0 small">x2</p>
+                                </div>
+                            </div>
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
+                                class="card-img-top" alt="Laptop" />
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                <p class="small text-danger"><s>$1199</s></p>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">HP Envy</h5>
+                                <h5 class="text-dark mb-0">$1099</h5>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2">
+                                <p class="text-muted mb-0">Available: <span class="fw-bold">7</span></p>
+                                <div class="ms-auto text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                            <div class="card">
+                            <div class="d-flex justify-content-between p-3">
+                                <p class="lead mb-0">Today's Combo Offer</p>
+                                <div
+                                class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                                style="width: 35px; height: 35px;">
+                                <p class="text-white mb-0 small">x3</p>
+                                </div>
+                            </div>
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
+                                class="card-img-top" alt="Gaming Laptop" />
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
+                                <p class="small text-danger"><s>$1399</s></p>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">Toshiba B77</h5>
+                                <h5 class="text-dark mb-0">$1299</h5>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2">
+                                <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
+                                <div class="ms-auto text-warning">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+        </section>
 </div>
 </template>
-<script setup>
+<!-- <script setup>
 import Dashboard from '../Dashboard.vue';
 import Pagination from '../Pagination.vue';
 
 
+</script> -->
+<script >
+import { onMounted } from 'vue';
+import useOrders  from '../../composables/orders.js'; // Assuming you have a separate composable for companies logic
+import Dashboard from '../Dashboard.vue';
+
+
+export default {
+    props: {
+        id: {
+            required: true,
+            type: String,
+        },
+    },
+    
+    setup(props) {
+      
+        // Use the composable to get the companies and fetch the specific product
+        const { order,getOrders ,getOrder} = useOrders();
+     
+        // Fetch the specific product on component mount
+        onMounted(() => {
+            getOrders();
+            getOrder(props.id);
+            console.log(props.id);
+        });
+       
+        return {  order,getOrders };
+    },
+    components : {
+      name :  Dashboard,
+    }
+   
+};
 </script>
 
 <style scoped>
@@ -155,4 +275,4 @@ a {
     vertical-align: baseline;
     border-radius: 0.75rem;
 }
-</style>
+</style> 

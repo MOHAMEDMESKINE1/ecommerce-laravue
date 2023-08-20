@@ -70,7 +70,10 @@ Route::controller(OrderController::class)->group(function(){
 
     Route::get('orders','index');
 
-    Route::get('orders/{id}','edit');
+    Route::get('orders/customers','customers');
+    Route::get('orders/products','products');
+
+    Route::get('orders/edit/{id}','edit');
     
     Route::get('orders/search','search');
 

@@ -12,40 +12,37 @@
         <form>
            <!--  customer -->
            <div class="form-floating mb-3">
-              <select name="customer" id="customer" v-model="product.customer" class="form-select shadow-none border border-2" >
+              <select name="customer" id="customer" v-model="order.customer" class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary"> select a Customer</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option  v-for="(customer,index) in customers.data"   :key="index" :value="customer.id">{{customer.name}}</option>
+             
               </select>
               <label for="customer"  class="fw-bold" >Customer</label>
 
             </div>
            <!--  product -->
            <div class="form-floating mb-3">
-              <select name="product" id="product" v-model="product.product" class="form-select shadow-none border border-2" >
+              <select name="product" id="product" v-model="order.product" class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary"> select a Product</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option  v-for="(product,index) in products.data"   :key="index" :value="product.id">{{product.title}}</option>
               </select>
               <label for="product"  class="fw-bold" >Product</label>
 
             </div>
             <!--  price -->
             <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="price" v-model="product.price" id="price"/>
+              <input type="number"  class="form-control shadow-none border border-2" name="price" v-model="order.price" id="price"/>
               <label for="price" class="fw-bold" >Price</label>
             </div>
              <!--  quantity -->
              <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="quantity" v-model="product.quantity" id="quantity"/>
+              <input type="number"  class="form-control shadow-none border border-2" name="quantity" v-model="order.quantity" id="quantity"/>
               <label for="quantity" class="fw-bold" >Quantity</label>
             </div>
             
              <!--  total -->
              <div class="form-floating mb-3">
-              <input type="number"  class="form-control shadow-none border border-2" name="total" v-model="product.total" id="total"/>
+              <input type="number"  class="form-control shadow-none border border-2" name="total" v-model="order.total" id="total"/>
               <label for="total" class="fw-bold" >Total</label>
             </div>
 
@@ -56,17 +53,17 @@
 
            
            <div class="form-check form-check-inline mb-2">
-            <input class="form-check-input" type="radio" v-model="product.payment" name="paid" id="paid" value="Paid">
+            <input class="form-check-input" type="radio" v-model="order.payment" name="payment" id="paid" value="0">
             <label class="form-check-label fw-bold" for="paid">Paid</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" v-model="product.payment" name="notpaid" id="notpaid" value="Not Paid">
+            <input class="form-check-input" type="radio" v-model="order.payment" name="payment" id="notpaid" value="1">
             <label class="form-check-label fw-bold" for="notpaid">Not Paid</label>
           </div>
         </div>
           <!-- status -->
           <div class="form-floating mb-3">
-              <select name="status" id="status" v-model="product.status" class="form-select shadow-none border border-2" >
+              <select name="status" id="status" v-model="order.status" class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary"> select status</option>
                 <option value="Pending">Pending</option>
                 <option value="Processing">Processing</option>
@@ -81,7 +78,7 @@
             </div>
                     
             <div class="d-flex ">
-              <button type="button"  @click="addedProduct"  class="btn btn-info">Save changes</button>
+              <button type="button"  @click="saveOrder()"  class="btn btn-info">Save changes</button>
               <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
             </div>
             
@@ -133,7 +130,7 @@
                                     <span class="text-primary fw-bold"> {{ order.user.name }}</span>
                                   </td>
                                   <td>
-                                    <img  :src="'storage/products/'+order.products.photo" class="me-2" alt="image"> {{product.title}}
+                                    <img  :src="'storage/products/'+order.products.photo" class="me-2" alt="image"> {{order.products.title}}
                                   </td>
                                   <td>{{order.quantity}} $</td>
                                   <td>{{order.price}} $</td>
@@ -149,8 +146,8 @@
                                   <td> 
                                     <div   class="d-flex justify-content-between">
                                       
-                                       <router-link to="/orders_details"  class=" mdi mdi-eye text-success fs-4  mx-2"></router-link>
-                                      <a href="#" class=" mdi mdi-grease-pencil fs-4  mx-2"></a>
+                                       <router-link :to="{name:'order.details',params:{id:order.id}}"   class=" mdi mdi-eye text-success fs-4  mx-2"></router-link>
+                                       <!-- <router-link   :to="{name:'orders_details',params:{id:order.id}}" class=" mdi mdi-grease-pencil fs-4  mx-2"></router-link> -->
                                       <a href="#"  @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
 
                                     </div>
@@ -183,32 +180,37 @@ import Dashboard from '../Dashboard.vue';
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import formattedDate from '../../helpers/index'
 
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { onMounted } from '@vue/runtime-core';
 
 import {successToast,errorToast,showConfirmation} from "../../toaster.js";
 import useOrders from '../../composables/orders';
 
 
-const {orders ,getOrders} = useOrders();
+const {orders ,customers,products,getProducts,getCustomers ,getOrders,addOrder} = useOrders();
 // form inputs
-const product = ref({
+const order =reactive({
     product: "",
-    customer:"tedy",
-    status :  "Cancelled",
-    price : 150,
-    payment : "paid",
-    quantity : 2,
-    total:100
+    customer:"",
+    status :  "",
+    price : 0,
+    payment : 0,
+    quantity : 0,
+    total:0
 
   })
 // 
 
 onMounted(() => {
   getOrders();
-}),
+  getCustomers();
+  getProducts();
+})
 
-  function addedProduct() {
+  const saveOrder = () => {
+
+      addOrder(order)
+
       successToast('Order saved succefully!');
    
   }
