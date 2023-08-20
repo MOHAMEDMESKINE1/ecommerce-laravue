@@ -40,7 +40,7 @@ export default function useOrders(){
     }
     const getOrder = async (id) => {
       
-        await axios.get(`/api/orders/edit/${id}`)
+        await axios.get(`/api/orders/${id}`)
         .then(response => {
            console.log( response.data);
          

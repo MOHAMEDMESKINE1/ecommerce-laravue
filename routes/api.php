@@ -73,7 +73,7 @@ Route::controller(OrderController::class)->group(function(){
     Route::get('orders/customers','customers');
     Route::get('orders/products','products');
 
-    Route::get('orders/edit/{id}','edit');
+    Route::get('orders/{id}','show');
     
     Route::get('orders/search','search');
 

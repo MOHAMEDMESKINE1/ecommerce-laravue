@@ -148,7 +148,7 @@
                                       
                                        <router-link :to="{name:'order.details',params:{id:order.id}}"   class=" mdi mdi-eye text-success fs-4  mx-2"></router-link>
                                        <!-- <router-link   :to="{name:'orders_details',params:{id:order.id}}" class=" mdi mdi-grease-pencil fs-4  mx-2"></router-link> -->
-                                      <a href="#"  @click.prevent="Confirmation()"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+                                      <a href="#"  @click.prevent="Confirmation(order.id)"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
 
                                     </div>
                                   </td>
@@ -187,7 +187,7 @@ import {successToast,errorToast,showConfirmation} from "../../toaster.js";
 import useOrders from '../../composables/orders';
 
 
-const {orders ,customers,products,getProducts,getCustomers ,getOrders,addOrder} = useOrders();
+const {orders ,customers,products,getProducts,getCustomers ,getOrders,addOrder,destroyOrder} = useOrders();
 // form inputs
 const order =reactive({
     product: "",
@@ -209,13 +209,12 @@ onMounted(() => {
 
   const saveOrder = () => {
 
-      addOrder(order)
+      addOrder(order,'#addOrder','.modal-backdrop')
 
-      successToast('Order saved succefully!');
    
   }
 
-  async function  Confirmation() {
+  async function  Confirmation(id) {
       const confirmed = await showConfirmation(
         'Are you sure?',
         'This action cannot be undone!',
@@ -224,6 +223,7 @@ onMounted(() => {
       );
 
       if (confirmed) {
+        destroyOrder(id)
         showToast('Order deleted successfully!');
       
       } else {

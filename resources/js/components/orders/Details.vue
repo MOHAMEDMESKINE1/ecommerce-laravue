@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <img v-if="order.products &&  order.products.photo"  :src="'/storage/products/'+order.products.photo" :alt="order.products.title" class="card-img-top" alt="Laptop" />
-                        <div class="d-flex  justify-content-between ">
+                        <div class="d-flex  justify-items-center ">
                             <p class="small mx-3 ">Ordered By : <strong class="text-success mt-2">{{ order.user && order.user.name }}</strong></p>
                             <p class="small mx-auto">Description : <br> <strong class="text-success mt-2">{{ order.products && order.products.description}}</strong></p>
 
@@ -71,7 +71,7 @@
                             <div class="d-flex  justify-content-between">
                             
                             <p class="small ">Old Price : <s class="text-danger"> {{ order.products && order.products.old_price }} $</s></p>
-                            <h5 class="text-dark mb-0">Price : {{ order.products && order.products.price }} $</h5>
+                            <p class="small text-primary mb-0">Price : {{ order.products && order.products.price }} $</p>
 
                             </div>
 

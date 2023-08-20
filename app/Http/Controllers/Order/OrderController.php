@@ -105,7 +105,7 @@ class OrderController extends Controller
        
   
      }
-     public function edit ($id){
+     public function show ($id){
         
         try {
   
@@ -116,7 +116,7 @@ class OrderController extends Controller
         } catch (Exception $ex) {
            
            return response()->json([
-              "ERROR orderController.edit : ".$ex->getMessage()
+              "ERROR orderController.show : ".$ex->getMessage()
            ]);
         }
        
