@@ -30,7 +30,7 @@
                             <div class="mt-3 pt-1">
                                 <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i> {{ contact.phone }}  </p>
                                 <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary "></i>{{ contact.email }} </p>
-                                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>{{contact.message}}</p>
+                                <p class="text-muted mb-0 mt-2"><i class=" font-size-15 align-middle pe-2 text-primary"></i>{{contact.message}}</p>
                             </div>
                             <div class="d-flex gap-2 pt-4">
                                 <!-- <button type="button" class="btn btn-soft-primary btn-sm w-50"><i class="bx bx-user me-1"></i> Profile</button> -->

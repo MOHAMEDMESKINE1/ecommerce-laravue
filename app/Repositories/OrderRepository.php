@@ -1,8 +1,9 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Order;
 use Carbon\Carbon;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderRepository  implements RepositoryInterface {
@@ -19,13 +20,36 @@ class OrderRepository  implements RepositoryInterface {
 
         return $this->order->with(["user","products","payments"])->paginate(2);
     }
+    public function Sales(){
+        $today = Carbon::now();
+        $startDate = Carbon::create(date('Y'), 1, 1); // Start from January 1st of the current year
+
+        $orders = $this->order->select(DB::raw("COUNT(*) as count"), DB::raw("DATE(created_at) as date"))
+            ->whereBetween('created_at', [$startDate, $today])
+            ->groupBy('date')
+            ->pluck('count', 'date');
+        
+        return $orders;
+    }
     function getById($id){
 
         // return $this->order->find($id);
         $order  = $this->order->with(["user","products"])->findOrFail($id);
         return $order ; 
     }
-
+    public function getProductCount($productId)
+    {
+        $product =$this->order->getById($productId);
+    
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+    
+        // $count = $product->orders()->count(); // Assuming you have a relationship set up for orders
+        $count = $product->orders()->count(); // Assuming you have a relationship set up for orders
+    
+        return $count ;
+    }
     public function search($query)
     {
         $orders = $this->order

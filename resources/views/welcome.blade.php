@@ -36,7 +36,7 @@
         <!-- Libraries Stylesheet -->
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-
+        <script src="https://kit.fontawesome.com/b535effebb.js" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
 
     </head>

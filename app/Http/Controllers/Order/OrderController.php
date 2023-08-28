@@ -47,6 +47,15 @@ class OrderController extends Controller
         
         return response()->json($products);
     }
+    
+    public function ordersSales()
+    {
+       
+        $sales  = $this->order->Sales();
+        
+        return response()->json($sales);
+    }
+
     public function search (Request $request){
       
         try {

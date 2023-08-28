@@ -5,6 +5,7 @@ import {useRouter} from "vue-router";
 
 export default function useOrders(){
     const orders = ref([]);
+    const sales = ref([]);
     const customers = ref([]);
     const products = ref([]);
     const order = ref('');
@@ -24,6 +25,15 @@ export default function useOrders(){
         await axios.get("/api/orders/customers")
         .then(response => {
             customers.value = response.data
+            console.log(response.data);
+        } )
+        .catch(err => console.log(err));
+
+    }
+    const getOrdersSales = async () => {
+        await axios.get("/api/orders/sales")
+        .then(response => {
+            sales.value = response.data
             console.log(response.data);
         } )
         .catch(err => console.log(err));
@@ -126,13 +136,15 @@ export default function useOrders(){
         products,
         errors,
         order,
+        sales,
         addOrder,
         destroyOrder,
         getOrders,
         getOrder,
         updateOrder,
         getCustomers,
-        getProducts
+        getProducts,
+        getOrdersSales
     }
 
 } 
