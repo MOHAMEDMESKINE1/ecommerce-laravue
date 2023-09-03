@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\NewsLetter\NewsLetterController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use Illuminate\Http\Request;
@@ -50,6 +51,17 @@ Route::controller(ContactController::class)->group(function(){
 
 
 });
+Route::controller(NewsLetterController::class)->group(function(){
+
+    Route::get('letters','index');
+
+    Route::post('letters/store','store');
+
+
+    Route::delete('letters/{id}','delete');
+
+
+});
 Route::controller(CategoryController::class)->group(function(){
 
     Route::get('categories','index');
@@ -73,6 +85,7 @@ Route::controller(OrderController::class)->group(function(){
     Route::get('orders/customers','customers');
     Route::get('orders/products','products');
     Route::get('orders/sales','ordersSales');
+    Route::get('orders/status','Payments');
 
     Route::get('orders/{id}','show');
     

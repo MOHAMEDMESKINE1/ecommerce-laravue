@@ -6,6 +6,7 @@ import {useRouter} from "vue-router";
 export default function useOrders(){
     const orders = ref([]);
     const sales = ref([]);
+    const status = ref([]);
     const customers = ref([]);
     const products = ref([]);
     const order = ref('');
@@ -39,6 +40,15 @@ export default function useOrders(){
         .catch(err => console.log(err));
 
     }
+    const getPayments = async () => {
+        await axios.get("/api/orders/status")
+        .then(response => {
+            status.value = response.data
+            console.log(response.data);
+        } )
+        .catch(err => console.log(err));
+
+    }
     const getProducts = async () => {
         await axios.get("/api/orders/products")
         .then(response => {
@@ -55,6 +65,24 @@ export default function useOrders(){
            console.log( response.data);
          
             order.value = response.data
+          
+        })
+        .catch(e => {
+           
+            errors.value = error.response.data.errors;
+            console.log(e)
+           
+          
+        
+        });
+
+    }
+    const searchOrder  = async (query) => {
+      
+        await axios.get('/api/orders/search/?query='+query)
+        .then(response => {
+
+            orders.value = response.data;
           
         })
         .catch(e => {
@@ -137,10 +165,13 @@ export default function useOrders(){
         errors,
         order,
         sales,
+        status,
+        getPayments,
         addOrder,
         destroyOrder,
         getOrders,
         getOrder,
+        searchOrder,
         updateOrder,
         getCustomers,
         getProducts,

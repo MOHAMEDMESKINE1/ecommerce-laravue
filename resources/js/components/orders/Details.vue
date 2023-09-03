@@ -52,7 +52,7 @@
                     <div class="row">
                     <div class="col-md-12 col-lg-4 mb-4 mb-lg-0 mx-auto">
                         <div class="card " >
-                        <div class="d-flex justify-content-between p-3">
+                        <div class="d-flex justify-content-between p-3 ">
                             <p class="lead mb-0"><strong class="text-muted">{{ order.products && order.products.title }}</strong></p>
 
                         <div
@@ -61,8 +61,8 @@
                             <p class="text-white mb-0 fw-bold display-7 small"> {{ order.products && order.products.size }}</p>
                             </div>
                         </div>
-                        <img v-if="order.products &&  order.products.photo"  :src="'/storage/products/'+order.products.photo" :alt="order.products.title" class="card-img-top" alt="Laptop" />
-                        <div class="d-flex  justify-items-center ">
+                        <img v-if="order.products &&  order.products.photo"  :src="'/storage/products/'+order.products.photo" :alt="order.products.title" class="" alt="Laptop" />
+                        <div class="d-flex  justify-items-center mt-5 ">
                             <p class="small mx-3 ">Ordered By : <strong class="text-success mt-2">{{ order.user && order.user.name }}</strong></p>
                             <p class="small mx-auto">Description : <br> <strong class="text-success mt-2">{{ order.products && order.products.description}}</strong></p>
 

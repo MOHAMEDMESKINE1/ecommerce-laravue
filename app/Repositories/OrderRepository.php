@@ -18,7 +18,7 @@ class OrderRepository  implements RepositoryInterface {
 
     public function all(){
 
-        return $this->order->with(["user","products","payments"])->paginate(2);
+        return $this->order->with(["user","products","payments"])->paginate(5);
     }
     public function Sales(){
         $today = Carbon::now();
@@ -31,9 +31,33 @@ class OrderRepository  implements RepositoryInterface {
         
         return $orders;
     }
+    public function StatusPayments(){
+
+        $statuses = ['Pending','Processing','Confirmed','Shipped','Delivered','On Hold','Cancelled'];
+        
+        $today = Carbon::now();
+        $startDate = Carbon::create(date('Y'), 1, 1); // Start from January 1st of the current year
+
+        $orders = $this->order->select(
+            DB::raw("COUNT(*) as count"), 
+            DB::raw("status"),
+          
+        )
+            ->whereBetween('created_at', [$startDate, $today])
+            ->whereIn('status', $statuses)
+            ->groupBy('status')
+            ->pluck('count','status');
+        
+        return $orders;
+    }
     function getById($id){
 
         // return $this->order->find($id);
+        $order  = $this->order->with(["user","products"])->where("id",$id)->first();
+        return $order ; 
+    }
+    function getByIdSearch($id){
+
         $order  = $this->order->with(["user","products"])->findOrFail($id);
         return $order ; 
     }
@@ -52,20 +76,8 @@ class OrderRepository  implements RepositoryInterface {
     }
     public function search($query)
     {
-        $orders = $this->order
-        ->where(function ($orderQuery) use ($query) {
-
-            $orderQuery->where('payment','=',$query);
-
-        })->orWhereHas('user', function ($categoryQuery) use ($query) {
-            $categoryQuery->where('name', 'like', '%' . $query . '%');
-        })
-        ->with(["user","products","payments"])
-        ->paginate(2);
-        
-        
-        return $orders ;
-        
+        $order = $this->order->where('status', 'like', '%' . $query . '%')->get();        
+        return $order ; 
     }
     public function filterStatus($query)
     {

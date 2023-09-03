@@ -164,12 +164,7 @@
                                 <input type="text"
                                   class="form-control w-75 shadow shadow-sm " name="query"  v-model="query"  @change="searchProduct()"  id="search" aria-describedby="helpId" placeholder="">
                               </div>
-                              <!-- <div class="mb-3">
-                                <label for="" class="form-label">Filter Date</label>
-                              <input type="date"
-                                  class="form-control shadow shadow-sm " name="filter_date"  v-model="filter_date"  @change="filterProduct()"  id="search" aria-describedby="helpId" placeholder=""> 
-                                
-                              </div>  -->
+                            
                             </div>
                             <div class="table-responsive">
                               <table class="table  table-bordered p-2 text-center">
@@ -269,7 +264,6 @@ import useCategories from '../../composables/categories';
     addProduct,
     destroyProduct,
     searchProduct,
-    filterProduct
   } = useProducts();
 // categories
   const {categories,getCategories} = useCategories();
@@ -289,7 +283,6 @@ import useCategories from '../../composables/categories';
   const size  = ref('');
   const color  = ref('');
   const query  = ref(null);
-  const filter_date  = ref(null);
 
 
   function onImageChanged(e) {
@@ -301,10 +294,7 @@ import useCategories from '../../composables/categories';
     () => query.value,(newValue) => {
       searchProduct(newValue);
     },
-    () => filter_date.value,(newValue) => {
-      filterProduct(newValue);
-    },
-
+    
   );
   function saveProduct() {
         let formdata = new FormData();

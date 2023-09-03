@@ -27,18 +27,20 @@
                         </div>
                         <div class="col-md-8 mb-5">
                             <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control border-2 py-3" placeholder="Your Name" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control border-2 py-3" placeholder="Your Email"
-                                        />
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary rounded-0 shadow shadow-md btn-block border-0 w-100 py-3" type="submit">Subscribe Now</button>
-                                </div>
-                            </form>
+                          
+                               <form action="">
+                                    <div class="form-group">
+                                        <input type="text" required v-model="form.name" class="form-control border-2 py-3" placeholder="Your Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" required v-model="form.email" class="form-control border-2 py-3" placeholder="Your Email"
+                                            />
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-primary rounded-0 shadow shadow-md btn-block border-0 w-100 py-3" type="button" @click="StoreLetter()">Subscribe Now</button>
+                                    </div>
+                               </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -68,7 +70,7 @@
         <i class="fas fa-arrow-up"></i>
         </button>
 </template>
-<script setup>
+<script>
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
@@ -92,6 +94,36 @@ function backToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+</script>
+
+<script setup>
+import { useLettersStore } from '../store/lettersStore';
+import {successToast} from '@/toaster';
+import { reactive } from 'vue';
+import { warningToast } from '../toaster';
+
+const form  = reactive({
+    name:'',
+    email :''
+})
+    const  letterStore = useLettersStore();
+
+    const StoreLetter = async( ) => {
+
+        if(form.name !=="" && form.email !== ""){
+            await letterStore.saveLetter(form);
+
+            form.name = "";
+            form.email = "";
+
+            successToast('Letter added successfully!');
+        }else{
+            warningToast("fileds are required ! ")
+        }
+       
+    }
+
+
 </script>
 <style>
 #btn-back-to-top {

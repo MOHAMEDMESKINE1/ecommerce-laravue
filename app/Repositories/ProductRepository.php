@@ -44,7 +44,7 @@ class ProductRepository  implements RepositoryInterface {
     }
     function getById($id){
 
-        return $this->product->find($id);
+        return $this->product->findOrFail($id);
     }
 
     public function store($params){

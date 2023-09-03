@@ -20,6 +20,7 @@
         "laravel-vue-pagination": "^4.1.0",
         "lodash.random": "^3.2.0",
         "moment": "^2.29.4",
+        "pinia": "^2.1.6",
         "sweetalert2": "^11.7.18",
         "v-pagination-3": "^0.1.7",
         "vee-validate": "^4.5.8",

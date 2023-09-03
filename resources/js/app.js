@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap's CSS
 
 
 import {createApp} from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 import { ref } from 'vue';
 
@@ -23,8 +24,9 @@ const toggleDarkMode = () => {
   };
   
 
-  
+
 const app = createApp(App)
+const pinia = createPinia();
 // Add a method to toggle the theme mode
 app.config.globalProperties.$toggleDarkMode = () => {
     darkMode.value = !darkMode.value;
@@ -33,6 +35,8 @@ app.config.globalProperties.$toggleDarkMode = () => {
 
 app.use(router);
 app.use(Toast);
+app.use(pinia)
+
 app.use(VueSweetalert2);
 app.provide('darkMode', darkMode); 
 app.provide('toggleDarkMode', toggleDarkMode);

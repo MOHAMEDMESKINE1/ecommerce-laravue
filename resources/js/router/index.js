@@ -18,7 +18,7 @@ import Cart from '../Cart.vue';
 import Shop from '../Shop.vue';
 import Checkout from '../Checkout.vue';
 import Contact from '../Contact.vue';
-
+import Letters from '../components/letters/Index.vue';
 
 import Products_Details from '../Details.vue';
 
@@ -125,6 +125,12 @@ const routes = [
         path:'/contacts',
         name:'contacts',
         component : Contacts
+    },
+  
+    {
+        path:'/letters',
+        name:'letters',
+        component : Letters
     },
   
     

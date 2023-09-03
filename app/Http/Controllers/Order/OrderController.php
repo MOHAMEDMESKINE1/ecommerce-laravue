@@ -55,25 +55,30 @@ class OrderController extends Controller
         
         return response()->json($sales);
     }
+    public function Payments()
+    {
+       
+        $payments  = $this->order->StatusPayments();
+        
+        return response()->json($payments);
+    }
 
     public function search (Request $request){
       
         try {
   
-           $search_query =$request->input('query');
+           $search_query =$request->input('q');
   
            $order  = $this->order->search($search_query);
-           
-          if($order){
+                
            return response()->json($order);
+   
+           
+   
+           
              
   
-          }else{
-              $orders =$this->order->all();
-              
-               return response()->json($orders);
-  
-          }
+          
   
   
         } catch (Exception $ex) {
@@ -119,8 +124,8 @@ class OrderController extends Controller
         try {
   
            $order  = $this->order->getById($id);
-  
-           return response()->json($order);
+           
+            return response()->json($order);
   
         } catch (Exception $ex) {
            

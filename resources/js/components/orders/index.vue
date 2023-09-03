@@ -4,7 +4,8 @@
 <div class="modal fade" id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header ">
+        
         <h1 class="modal-title fs-5 text-info" id="exampleModalLabel">Add Order</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -63,7 +64,7 @@
         </div>
           <!-- status -->
           <div class="form-floating mb-3">
-              <select name="status" id="status" v-model="order.status" class="form-select shadow-none border border-2" >
+              <select name="status" id="status" v-model="order.status"  class="form-select shadow-none border border-2" >
                 <option selected class="text-secondary"> select status</option>
                 <option value="Pending">Pending</option>
                 <option value="Processing">Processing</option>
@@ -97,15 +98,38 @@
                       <div class="card m-2">
                         <div class="card-body">
                           <div class="d-flex justify-content-end mb-2">
-                            <button class="btn btn-sm border border-primary btn-outline-primary "
-                            data-bs-toggle="modal" data-bs-target="#addOrder"
-                            >
+                              <button class="btn btn-sm border border-primary btn-outline-primary"
+                              data-bs-toggle="modal" data-bs-target="#addOrder" >                              
+                                <i class="mdi mdi-hospital  mx-2"></i>
+                                Add Order
+                              </button>
+                            </div>
+                            <div class="mt-4 d-flex justify-content-between">
+                              <div class="mb-3">
+                                <!-- <label for="" class="form-label">Search Order</label> -->
+                                <!-- <input type="text"
+                                  class="form-control w-75 shadow shadow-sm " name="q"  v-model="q"  @change="searchOrder()"  id="search" aria-describedby="helpId" placeholder=""> -->
+                                  <!-- <select  id="status" name="query"  v-model="query"  @change="searchOrder()"  class="form-select shadow-none border border-2" >
+                                    <option selected class="text-secondary"> select status</option>
+                                    <option value="">all</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Processing">Processing</option>
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="Shipped">Shipped</option>
+                                    <option value="Delivered">Delivered</option>
+                                    <option value="On Hold">On Hold</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                  </select> -->
+                              </div>
                             
-                              <i class="mdi mdi-hospital  mx-2"></i>
-                              Add Order
-                            </button>
-                          </div>
-                          <h4 class="card-title text-info">Orders List</h4>
+                            </div>
+                          <!-- <div class="d-flex justify-content-start">
+                            <label for="" class="form-label">Search Product</label>
+                                <input type="text"
+                                  class="form-control w-25 shadow shadow-sm " name="query"  v-model="query"  @change="searchProduct()"  id="search" aria-describedby="helpId" placeholder="">
+
+                          </div> -->
+                          <h4 class="card-title text-info">Orders List ({{ orders.total }})</h4>
                           <div class="table-responsive">
                             <table class="table table-bordered p-2 text-center">
                               <thead>
@@ -180,14 +204,23 @@ import Dashboard from '../Dashboard.vue';
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import formattedDate from '../../helpers/index'
 
-import { reactive, ref } from 'vue';
+import { reactive,ref, watch } from 'vue';
 import { onMounted } from '@vue/runtime-core';
 
-import {successToast,errorToast,showConfirmation} from "../../toaster.js";
+import {errorToast,showConfirmation} from "../../toaster.js";
 import useOrders from '../../composables/orders';
 
 
-const {orders ,customers,products,getProducts,getCustomers ,getOrders,addOrder,destroyOrder} = useOrders();
+const {orders ,
+  customers,
+  products,
+  getProducts,
+  getCustomers ,
+  searchOrder,
+  getOrders,
+  addOrder,
+  destroyOrder
+} = useOrders();
 // form inputs
 const order =reactive({
     product: "",
@@ -200,13 +233,20 @@ const order =reactive({
 
   })
 // 
+const q  = ref(null);
 
 onMounted(() => {
   getOrders();
   getCustomers();
   getProducts();
+ 
 })
 
+watch(
+    () => q.value,(newValue) => {
+      searchOrder(newValue);
+    }
+)
   const saveOrder = () => {
 
       addOrder(order,'#addOrder','.modal-backdrop')
