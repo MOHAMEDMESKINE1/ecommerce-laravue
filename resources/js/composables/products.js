@@ -4,10 +4,12 @@ import { successToast} from "../toaster.js"
 import {useRouter} from "vue-router";
 
 export default function useProducts(){
-    
+
+    const carts = ref([]);
+    const all_products = ref([]);
     const products = ref([]);
     const product = ref('');
-   const errors = ref([])
+   const errors = ref([]);
    const router = useRouter();
    
     const getProducts  = async (page = 1 ) => {
@@ -26,11 +28,109 @@ export default function useProducts(){
           
        
         });
+        
+        }
+        const getCart  = async () => {
+      
+            await axios.get('/api/carts')
+            .then(response => {
+                
+                carts.value = response.data;
+                console.log(response.data);
+            })
+            .catch(e => {
+               
+                // errors.value = error.response.data.errors;
+                console.log(e)
+               
+              
+           
+            });
+            
+            }
+    const addToCart  = async (id) => {
 
-    }
+        try {
+            await axios.post(`/api/carts/add`,id)
+            .then(response => {
+                console.log(response.data);
+                console.log('Product added to cart:', response.data);
+                
+            })
+            .catch(e => {
+                
+                errors.value = error.response.data.errors;
+                console.log(e)
+                
+                
+            
+            });
+        } catch (error) {
+            console.log("addToCart ERROR :  "+error);
+        }
+        
+        }
+        const allProducts  = async () => {
+        
+            await axios.get('/api/products/all')
+            .then(response => {
+
+                console.log(response.data);
+                all_products.value = response.data;
+            
+            })
+            .catch(e => {
+            
+                errors.value = error.response.data.errors;
+                console.log(e)
+            
+            
+        
+            });
+        }
     const getProduct  = async (id) => {
       
         await axios.get(`/api/products/edit/${id}`)
+        .then(response => {
+
+            product.value = response.data;
+           
+        })
+        .catch(e => {
+           
+            errors.value = error.response.data.errors;
+            console.log(e)
+           
+          
+        
+        });
+
+    }
+    const getProductDetails  = async (id) => {
+      
+        try {
+            await axios.get(`/api/products/details/${id}`)
+            .then(response => {
+
+                product.value = response.data;
+            
+            })
+            .catch(e => {
+            
+                errors.value = error.response.data.errors;
+                console.log(e)
+            
+            
+            
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    const getProductCart  = async (id) => {
+      
+        await axios.get(`/api/carts/product/${id}`)
         .then(response => {
 
             product.value = response.data;
@@ -153,18 +253,41 @@ export default function useProducts(){
               
             });
         }
+        const destroyCart = async (id)=> {
 
+          
+            await axios.delete(`/api/carts/${id}`)
+             .then(res => {
+                 getCart();
+    
+               console.log(res);
+             }).catch(error => {
+              
+                 console.error(error);
+               
+             });
+         }
     return {
+      
         products,
         product,
         errors,
+        all_products,
+        carts,
+        getCart,
+        getProductCart,
+        addToCart,
+        destroyCart,
+        allProducts,
+        getProductDetails,
         searchProduct,
         filterProduct,
         getProducts,
         getProduct,
         addProduct,
         updateProduct,
-        destroyProduct
+        destroyProduct,
+       
     }
 
 } 

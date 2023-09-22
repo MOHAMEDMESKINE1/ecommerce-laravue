@@ -79,22 +79,52 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
+                           <!-- home -->
                             <router-link to="/" class="nav-item nav-link py-md-2 px-md-3">Home </router-link>
+                            <!-- shop -->
                             <router-link to="/shop" class="nav-item nav-link py-md-2 px-md-3">Shop </router-link>
+                           <!-- details product -->
                             <router-link to="/details_product" class="nav-item nav-link py-md-2 px-md-3">Details </router-link>
+                           
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
+                                    <!-- cart -->
                                     <router-link to="/cart" class="dropdown-item">Shopping Cart</router-link>
+                                    <!-- checkout -->
                                     <router-link to="/checkout" class="nav-item nav-link py-md-2 px-md-3">Checkout </router-link>
                                 </div>
                             </div>
+                            <!-- contact -->
                             <router-link to="/contact" class="nav-item nav-link py-md-2 px-md-3">Contact </router-link>
                         </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                        <!-- <div class="navbar-nav" v-if="loggedUser">
+                            <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+                            <router-link to="/" class="nav-item nav-link">Home</router-link>
+                            <a href="javascript:void(0)" class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
                         </div>
+                        <div class="navbar-nav" v-else>
+                            <router-link to="/login" class="nav-item nav-link">Login</router-link>
+                            <router-link to="/register" class="nav-item nav-link">Register</router-link>
+                        </div> -->
+                        <ul v-if="!store.getUser" class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <router-link class="nav-link" aria-current="page" to="/login">Login</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" aria-current="page" to="/register">Regitser</router-link>
+                            </li>
+                        </ul>
+                        <ul v-else class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <router-link class="nav-link" aria-current="page" to="#">
+                                    {{ store.getUser.data.name }}
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" @click="userLogout" style="cursor:pointer">Logout</a>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
             </div>
@@ -104,8 +134,25 @@
 
     </div>
 </template>
+<script setup>
+    import { useAuthStore } from '../Auth.js';
+   import Swal from 'sweetalert2';
+    import router from '../router';
 
-<script>
+    const store = useAuthStore();
 
-
+    const userLogout = async () => {
+        
+        try {
+            const response = await axios.get('/api/logout', store.getHeaderConfig);
+            Swal.fire({
+                icon: 'success',
+                text: response.data.message,
+            });
+            store.clearStoredData();
+            router.push('/login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
 </script>

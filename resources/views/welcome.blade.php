@@ -162,10 +162,42 @@
             </div>
         </div> --}}
         <div id="app"></div>
+    @if (Auth::check())
+        <script>
+            window.Laravel = {!!json_encode([
+                'isLoggedin' => true,
+                'user' => Auth::user()
+            ])!!}
+        </script>
+        @else
+            <script>
+                window.Laravel = {!!json_encode([
+                    'isLoggedin' => false
+                ])!!}
+            </script>
+        @endif
+       
 
         
-           
-
+        
+        {{-- <div id="app"></div>
+        @if (Auth::check())
+        @php
+        $user_auth_data = [
+            'isLoggedin' => true,
+            'user' =>  Auth::user()
+        ];
+        @endphp
+        @else
+            @php
+            $user_auth_data = [
+                'isLoggedin' => false
+            ];
+            @endphp
+        @endif
+        <script>
+            window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));
+        </script> --}}
 
 
 

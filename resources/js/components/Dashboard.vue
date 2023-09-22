@@ -31,7 +31,7 @@
                           <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
-                          <p class="mb-1 text-black">David Greymaax</p>
+                          <p class="mb-1 text-black">{{ name || 'David Greymaax' }}</p>
                         </div>
                       </a>
                       <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -274,13 +274,31 @@
     </div>   
  </template>
 
-<script setup>
+<script>
 import {  inject } from 'vue';
 
     // Inject the darkMode variable from the app entry point
     const darkMode = inject('darkMode');
     const toggleDarkMode = inject('toggleDarkMode');
-
+export default {
+    name: "Dashboard",
+    data() {
+        return {
+            name: null,
+        }
+    },
+    created() {
+        if (window.Laravel.user) {
+            this.name = window.Laravel.user.name
+        }
+    },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+        next();
+    }
+}
 </script>
 <style scoped>
 

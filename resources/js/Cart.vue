@@ -8,17 +8,18 @@
                     <table class="table table-bordered text-center mb-0">
                         <thead class="bg-secondary text-dark">
                             <tr>
-                                <th>Products</th>
+                                <th>Products </th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
-                                <th>Remove</th>
+                                <th>Remove </th>
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-                            <tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
-                                <td class="align-middle">$150</td>
+                            <template v-for="cart in carts" :key="cart.id">
+                                <tr>
+                                <td class="align-middle"><img :src="'storage/products/'+cart.products.photo" alt="" style="width: 50px;"> {{cart.products.title}}</td>
+                                <td class="align-middle"> {{cart.products.price}}</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
@@ -26,7 +27,7 @@
                                             <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control shadow-none form-control-sm bg-light text-center" value="1">
+                                        <input type="text" class="form-control shadow-none form-control-sm  bg-light text-center" :value="cart.products.quantity">
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
@@ -34,10 +35,16 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle">${{cart.products.old_price}}</td>
+                                <td class="align-middle">
+                                    <!-- <a href="#" class="btn btn-sm btn-danger"  @click.prevent="Confirmation(cart.id)"><i class="fa fa-times"></i></a> -->
+                                    <a href="#"  @click.prevent="Confirmation(cart.id)"  class="mdi mdi-delete-forever fs-4 text-danger"></a>
+
+                                </td>
                             </tr>
-                            <tr>
+                            </template>
+                          
+                            <!-- <tr>
                                 <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Colorful Stylish Shirt</td>
                                 <td class="align-middle">$150</td>
                                 <td class="align-middle">
@@ -120,7 +127,7 @@
                                 </td>
                                 <td class="align-middle">$150</td>
                                 <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -135,7 +142,7 @@
                     </form>
                     <div class="card border-light border-5 mb-5">
                         <div class="card-header bg-light border-0">
-                            <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                            <h4 class="font-weight-semi-bold m-0">s Summary</h4>
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-3 pt-1">
@@ -168,6 +175,37 @@
 <script setup>
 
 import Main from './layouts/Main.vue'
+
+
+import useProducts from '../js/composables/products.js';
+import { onMounted } from '@vue/runtime-core';
+import {errorToast,showConfirmation, successToast} from "../js/toaster.js";
+
+// produtcs
+const {carts,getCart,destroyCart} = useProducts();
+
+onMounted(() => {
+    getCart();
+})
+async function  Confirmation(id) {
+      const confirmed = await showConfirmation(
+        'Are you sure?',
+        'This action cannot be undone!',
+        'Yes, proceed!',
+        'No, cancel!'
+      );
+
+      if (confirmed) {
+        
+        destroyCart(id)
+
+        console.log("clicked");
+        successToast('Cart deleted successfully!');
+      
+      } else {
+        errorToast('Cart cancelled');
+      }
+    }
 </script>
 
 <style>

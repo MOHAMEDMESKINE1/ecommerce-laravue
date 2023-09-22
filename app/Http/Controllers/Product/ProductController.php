@@ -39,6 +39,37 @@ class ProductController extends Controller
       }
         
    }
+   public function getDetails($id){
+      try {
+         
+         $product =$this->product->getById($id);
+
+         return  response()->json($product);
+
+      } catch (Exception $ex) {
+         
+         return response()->json([
+            "ERROR ProductController.getDetails : ".$ex->getMessage()
+         ]);
+      }
+
+
+   }
+   public function allProducts(){
+
+      try {
+         $products =$this->product->products();
+        
+        return response()->json($products);
+
+      } catch (Exception $ex) {
+         
+         return response()->json([
+            "ERROR ProductController.allProducts : ".$ex->getMessage()
+         ]);
+      }
+        
+   }
    public function categories(){
 
      

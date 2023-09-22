@@ -30,7 +30,7 @@
                           
                                <form action="">
                                     <div class="form-group">
-                                        <input type="text" required v-model="form.name" class="form-control border-2 py-3" placeholder="Your Name" />
+                                        <input  validation="required"   type="text" required v-model="form.name" class="form-control border-2 py-3" placeholder="Your Name" />
                                     </div>
                                     <div class="form-group">
                                         <input type="email" required v-model="form.email" class="form-control border-2 py-3" placeholder="Your Email"
@@ -116,7 +116,7 @@ const form  = reactive({
             form.name = "";
             form.email = "";
 
-            successToast('Letter added successfully!');
+            successToast('Thank You For Join Our NewsLetter !');
         }else{
             warningToast("fileds are required ! ")
         }

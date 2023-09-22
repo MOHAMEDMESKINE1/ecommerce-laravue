@@ -13,8 +13,10 @@ export const useLettersStore = defineStore({
     // Read all letters
     async getLetters() {
        try {
-          const response = await axios.get("/api/letters");
-          this.letters = response.data  ; 
+          const response = await axios.get("/api/letters")
+          this.letters = response.data  ;
+         
+         
           console.log(response.data);
        } catch (error) {
           console.log("ERROR GetLetters : "+ error);
@@ -22,11 +24,14 @@ export const useLettersStore = defineStore({
     },
     // Create a new letter
     async saveLetter(newLetter) {
-      await axios.post("/api/letters/store",newLetter);
-      this.getLetters();
-    },
+      try {
+        await axios.post("/api/letters/store",newLetter);
+        this.getLetters();
+      } catch (error) {
+        console.log("ERROR saveLetter : "+ error);
+      }
     
-
+    },
   async  deleteLetter(id) {
       try {
          await axios.delete(`/api/letters/${id}`);

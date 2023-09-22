@@ -43,11 +43,11 @@
             </div>
             <div class="d-flex justify-content-center">
                   <!-- pagination -->
-            <!-- <Bootstrap5Pagination
-                              :data="letters"
-                              @pagination-change-page="lettersStore.getLetters()"
-          /> -->
-             <!-- pagination -->
+             <!-- <Bootstrap5Pagination
+                              :data="letterStore.letters"
+                              @pagination-change-page="fetchLetters"
+            /> 
+             -->
             </div>
             
 

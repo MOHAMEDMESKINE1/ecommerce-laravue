@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Category;
@@ -24,6 +25,12 @@ class Product extends Model
         'category',
     ];
     // protected $guarded  = [""];
+
+    public function cart()
+    {
+         return $this->hasMany(Cart::class,'cart_id');
+    }
+    
     public function categories()
     {
         return $this->belongsTo(Category::class,'category_id');

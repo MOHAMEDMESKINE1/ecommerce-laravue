@@ -16,7 +16,7 @@ class LetterRepository  implements RepositoryInterface {
 
     public function all(){
 
-        return $this->letter->select("*")->get();
+        return $this->letter->latest()->orderBy("name","desc")->get();
     }
     public function count(){
 

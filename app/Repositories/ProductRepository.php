@@ -18,6 +18,10 @@ class ProductRepository  implements RepositoryInterface {
 
         return $this->product->latest()->with("categories")->paginate(5);
     }
+    public function products(){
+
+        return $this->product->all();
+    }
     public function search($query)
     {
         $products = $this->product

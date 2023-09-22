@@ -19,26 +19,47 @@ import Shop from '../Shop.vue';
 import Checkout from '../Checkout.vue';
 import Contact from '../Contact.vue';
 import Letters from '../components/letters/Index.vue';
-
+import Login from '../components/auth/Login.vue'
+import Register from '../components/auth/Register.vue'
 import Products_Details from '../Details.vue';
+
+
 
 const routes = [
     {
         path:'/dashboard',
         name:'Dashboard',
-        component : Dashboard
+        component : Dashboard,
+       
+    },
+    {
+        path:'/login',
+        name:'login',
+        component : Login,
+      
+    },
+    {
+        path:'/register',
+        name:'register',
+        component : Register
     },
     // front end
-
+    {
+        path:'/home',
+        name:'home',
+        component : Home,
+       
+    },
     {
         path:'/',
         name:'index_home',
         component : IndexHome
     },
     {
-        path:'/details_product',
-        name:'details_product',
-        component : Products_Details
+        path:'/details_product/:id',
+        name:'products.details',
+        component : Products_Details,
+        props:true
     },
     {
         path:'/cart',
@@ -62,11 +83,7 @@ const routes = [
     },
 
     // backend
-    {
-        path:'/home',
-        name:'home',
-        component : Home
-    },
+    
    
     {
         path:'/orders',

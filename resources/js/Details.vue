@@ -49,7 +49,7 @@
             </div>
 
             <div class="col-lg-7 pb-5">
-                <h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
+                <h3 class="font-weight-semi-bold" v-if="product">{{ product.title || 'TEST'}}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -268,3 +268,55 @@
 import Main from './layouts/Main.vue';
 
 </script>
+<script>
+import { defineProps, onMounted } from 'vue';
+import useProducts from '../js/composables/products';
+
+export default {
+  props: {
+    id: {
+      required: true,
+      type: String,
+    },
+  },
+  setup(props) {
+    const { product, getProducts, getProductDetails } = useProducts();
+
+    // Fetch the specific product on component mount
+    onMounted(() => {
+      getProducts();
+      getProductDetails(props.id);
+    });
+
+    return {
+      product,
+      getProducts
+    };
+  },
+};
+</script>
+<!-- <script >
+import { onMounted,defineProps } from 'vue';
+import useProducts  from '../js/composables/products'; // Assuming you have a separate composable for companies logic
+
+    const props = defineProps({
+        id: {
+            required: true,
+            type: Number,
+        },
+    })
+   
+    
+   
+      
+        // Use the composable to get the companies and fetch the specific product
+        const {product,getProducts,getProductDetails} = useProducts();
+     
+        // Fetch the specific product on component mount
+        onMounted(() => {
+            getProducts();
+            getProductDetails(props.id);
+            console.log(props.id);
+        });
+
+</script> -->
