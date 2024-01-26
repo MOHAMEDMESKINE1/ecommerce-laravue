@@ -30,12 +30,14 @@ const routes = [
         path:'/dashboard',
         name:'Dashboard',
         component : Dashboard,
+        meta: { requiresAuth: true },
        
     },
     {
         path:'/login',
         name:'login',
         component : Login,
+        
       
     },
     {
@@ -59,7 +61,8 @@ const routes = [
         path:'/details_product/:id',
         name:'products.details',
         component : Products_Details,
-        props:true
+        props:true,
+        
     },
     {
         path:'/cart',
@@ -88,66 +91,81 @@ const routes = [
     {
         path:'/orders',
         name:'orders',
-        component : Orders
+        component : Orders,
+        meta: { requiresAuth: true },
     },
     {
         path:'/products',
         name:'products.index',
-        component : Products
+        component : Products,
+        meta: { requiresAuth: true },
+
     },
     {
         path:'/products/edit/:id',
         name:'products.edit',
         component : Edit,
-        props : true
+        props : true,
+        meta: { requiresAuth: true },
+
     },
     {
         path:'/statistics',
         name:'statistics',
-        component : Statistics
+        component : Statistics,
+        meta: { requiresAuth: true },
+
     },
     {
         path:'/customers',
         name:'customers',
-        component : Customers
+        component : Customers,
+        meta: { requiresAuth: true },
     },
     {
         path:'/categories',
         name:'categories',
-        component : Categories
+        component : Categories,
+        meta: { requiresAuth: true },
     },
     {
         path:'/categories/edit/:id',
         name:'categories.edit',
         component : EditCateory,
         props : true,
+        meta: { requiresAuth: true },
     },
     {
         path:'/payments',
         name:'payments',
-        component : Payments
+        component : Payments,
+        meta: { requiresAuth: true },
     },
     {
         path:'/payment_details',
         name:'payment_details',
-        component : PaymentsDetails
+        component : PaymentsDetails,
+        meta: { requiresAuth: true },
     },
     {
         path:'/orders_details/:id',
         name:'order.details',
         component : Orders_Details,
         props:true,
+        meta: { requiresAuth: true },
     },
     {
         path:'/contacts',
         name:'contacts',
-        component : Contacts
+        component : Contacts,
+        meta: { requiresAuth: true },
     },
   
     {
         path:'/letters',
         name:'letters',
-        component : Letters
+        component : Letters,
+        meta: { requiresAuth: true },
     },
   
     
@@ -158,5 +176,13 @@ const router = createRouter({
     routes
 
 })
-
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = localStorage.getItem('access_token');
+  
+    if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
+      next('/login'); // Redirect to login if authentication is required and user is not authenticated
+    } else {
+      next();
+    }
+  });
 export default router;

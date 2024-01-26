@@ -12,7 +12,7 @@
               
             </div>
             <div class="row">
-                <div class="col-6  col-md-6  " v-for="contact in contacts.data">
+                <div class="col-6  col-md-6  " v-for="contact in contacts.data" :key="contact.id">
                     <div class="card" >
                         <div class="card-body">
                             

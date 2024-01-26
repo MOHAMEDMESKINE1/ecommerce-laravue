@@ -8,7 +8,7 @@
                         <!-- <img class="card-img-top" src="holder.js/100px180/" alt="Title"> -->
                         <div class="card-body">
                           <h4 class="card-title ">Edit Product</h4>
-                                <form  method="post" enctype="multipart/form-data" @submit.prevent="saveProduct()">
+                                <form  method="post"  @submit.prevent="saveProduct" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-* mx-auto ">
                                             <!--  title -->
@@ -24,7 +24,7 @@
                                             <input name="photo" class="form-control form-control-sm shadow-none border border-2 border border-2" id="photo"   type="file" @change="onImageChanged">
                                             <label for="photo" class="fw-bold" >Photo </label>
                                             <div v-if="product.photo">
-                                              <img  :src="'/storage/products/'+product.photo" class="me-2" :alt="product.title" > 
+                                              <img  :src="'/products/images/'+product.photo" class="w-25" :alt="product.title" > 
 
                                             </div>
                                             <img v-else src="assets/images/faces-clipart/pic-1.png" class="me-2" alt="image"> 
@@ -117,7 +117,7 @@
                                     <div class="form-floating mb-3">
                                         <select  name="category_id" id="category" v-model="product.category_id" class="form-select shadow-none border border-2" >
                                         <option selected class="text-secondary">  select category</option>
-                                        <option v-for="category in categories.data"   :value='category.id  '  :selected ="category.id === category.id "  :key="category.id">
+                                        <option v-for="category in categories.data"   :value="category.id"   :key="category.id">
                                         {{category.title}}
                                         </option>
                                     
@@ -130,7 +130,7 @@
                                     
                                     
                                         <div class="d-flex ">
-                                        <button type="button"  @click.prevent="saveProduct()"  class="btn btn-info">Save changes</button>
+                                        <button type="button"  @click.prevent="saveProduct"  class="btn btn-info">Save changes</button>
                                         <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
 
                                         </div>
@@ -150,7 +150,8 @@
 import { ref,onMounted } from 'vue';
 import useProducts  from '../../composables/products.js'; // Assuming you have a separate composable for companies logic
 import useCategories  from '../../composables/categories.js'; // Assuming you have a separate composable for companies logic
-
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 export default {
     props: {
         id: {
@@ -161,16 +162,23 @@ export default {
     
     setup(props) {
       
+       
+       const router  = useRouter()
+        const photo = ref('')
         // Use the composable to get the companies and fetch the specific product
         const { product, getProduct,updateProduct } = useProducts();
         const { categories, getCategories } = useCategories();
+         
+       
         // Fetch the specific product on component mount
         onMounted(() => {
             getCategories();
             getProduct(props.id);
+           
             
         });
-        const photo = ref('');
+       
+
         function onImageChanged(e) {
             console.log(e.target.files[0]);
             photo.value = e.target.files[0];
@@ -178,8 +186,41 @@ export default {
         // Define the function to save the product
         const saveProduct = async () => {
             try {
+                let config = {
+                    headers : {"content-type":"multipart/from-data"}
+                }   
+
+                let formdata = new FormData();
+                formdata.append('_method','put');
+                formdata.append('title',product.title)
+                formdata.append('description',product.description)
+                formdata.append('photo',photo.value)
+                formdata.append('price',product.price)
+                formdata.append('old_price',product.old_price)
+                formdata.append('quantity',product.quantity)
+                formdata.append('size',product.size)
+                formdata.append('color',product.color)
+                formdata.append('category_id',product.category_id)
+              
+
+                // await updateProduct(props.id,product.value);
                
-                await updateProduct(props.id);
+                await axios.put(`/api/products/update/${props.id}`,formdata,config)
+                .then(_ => {
+                    // successToast('Product updated succefully!');
+                    console.log("product updated ..");
+
+                    router.push({name:'products.index'})
+                    
+                })
+                .catch(e => {
+                    
+                    // errors.value = error.response.data.errors;
+                    console.log(e)
+                    
+                    
+                
+                });
             }
             catch (error) {
                 console.log(error);

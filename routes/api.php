@@ -137,7 +137,7 @@ Route::controller(AuthController::class)->group(function(){
     
         Route::post('products/store','store');
     
-        Route::put('products/{id}','update');
+        Route::put('products/update/{id}','update');
     
         Route::delete('products/{id}','delete');
     

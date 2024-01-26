@@ -61,11 +61,10 @@ class ProductRepository  implements RepositoryInterface {
             // get image name
             $filename = time().".".request()->photo->getClientOriginalExtension();
             //  store image in public folder
-            request()->photo->move(public_path('storage/products'),$filename);
-           
-            $this->product->photo =  $filename;
+            request()->photo->move(public_path('products/images'),$filename);    
 
         }
+
         $this->product->title =  $params["title"];
         $this->product->description =  $params["description"];
         $this->product->price =  intval($params["price"]);
@@ -73,6 +72,7 @@ class ProductRepository  implements RepositoryInterface {
         $this->product->quantity =  intval($params["quantity"]);
         $this->product->size =  $params["size"];
         $this->product->color =  $params["color"];
+        $this->product->photo = $filename;
         $this->product->category_id =  $params["category_id"];
 
         $this->product->save();
@@ -80,33 +80,44 @@ class ProductRepository  implements RepositoryInterface {
     }
 
     
-    public function update($params,$id){
+    public function update($id,$params){
 
-        $product = $this->getById($id);
+        $product =  $this->getById($id);
+        $filename = null;
+        if(request()->hasFile('photo')){
 
-        $filename  = null;
-        $file= request()->file('photo');
-
-         if(request()->hasFile('photo')){
             // get image name
-            $filename = time().".".$file->getClientOriginalExtension();
+            $filename = time().".".request()->photo->getClientOriginalExtension();
             //  store image in public folder
-           $file->move(public_path('storage/products'),$filename);
-          
-            $product->photo =  $filename;
+            request()->photo->move(public_path('products/images'),$filename);
+        
+   
 
         }
-        $product->title =  $params["title"];
-        $product->description =  $params["description"];
-        $product->price =  intval($params["price"]);
-        $product->old_price =  intval($params["old_price"]);
-        $product->quantity =  intval($params["quantity"]);
-        $product->size =  $params["size"];
-        $product->color =  $params["color"];
-    
-        $product->category_id =  $params["category_id"];
+        
+        $product->update([
+            "title"=> $params->title,
+            "description"=> $params->description,
+            "price"=> $params->price,
+            "old_price"=> $params->old_price,
+            "quantity"=> $params->quantity,
+            "size"=> $params->size,
+            "photo"=>$filename !='' ? $filename : $params->photo ,
+            "category_id"=> $params->category_id,
+            
+        ]);
 
-        $product->save();
+        // $product->title =  $params["title"];
+        // $product->description =  $params["description"];
+        // $product->price =  intval($params["price"]);
+        // $product->old_price =  intval($params["old_price"]);
+        // $product->quantity =  intval($params["quantity"]);
+        // $product->size =  $params["size"];
+        // $product->photo =   $filename !='' ? $filename : $product->photo ;
+        // $product->color =  $params["color"];
+        // $product->category_id =$params["category_id"] ?? 21;
+
+        // $product->save();
 
     }
    

@@ -7,8 +7,10 @@ export const useAuthStore = defineStore('auth', {
         errors: ''
     }),
     getters: {
+
         getUser: (state) => state.user,
         getErrors: (state) => state.errors,
+      
         getHeaderConfig(state) {
             const config = {
                 headers: {
@@ -21,17 +23,17 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         setUser() {
-            if (localStorage.getItem('user')) {
-                this.user = JSON.parse(localStorage.getItem('user'));
+            if (localStorage.getItem('access_token')) {
+                this.user = JSON.parse(localStorage.getItem('access_token'));
             }
         },
         storeUser(user) {
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('access_token', JSON.stringify(user));
             this.user = user;
         },
         clearStoredData() {
-            localStorage.removeItem('user');
-            this.user = '';
+            localStorage.removeItem('access_token');
+            this.user = null;
         },
         setErrors(errors) {
             this.errors = errors;

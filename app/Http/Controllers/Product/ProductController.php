@@ -179,11 +179,11 @@ class ProductController extends Controller
       }
         
    }
-   public function update(Request $params,$id){
+   public function update($id,Request $params){
 
       try {
 
-         $products = $this->product->update($params,$id);
+         $products = $this->product->update($id,$params);
 
          return response()->json($products);
 

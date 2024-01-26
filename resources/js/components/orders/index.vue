@@ -154,7 +154,7 @@
                                     <span class="text-primary fw-bold"> {{ order.user.name }}</span>
                                   </td>
                                   <td>
-                                    <img  :src="'storage/products/'+order.products.photo" class="me-2" alt="image"> {{order.products.title}}
+                                    <img  :src="'/products/images/'+order.products.photo" class="me-2" alt="image"> {{order.products.title}}
                                   </td>
                                   <td>{{order.quantity}} $</td>
                                   <td>{{order.price}} $</td>

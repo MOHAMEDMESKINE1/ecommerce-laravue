@@ -95,18 +95,14 @@
                             this.$router.go("/login");
                         })
                         .catch(function (error) {
-                            console.error(error);
+                            console.log(error);
+         
                         });
                     
                 }
             }
         },
 
-        beforeRouteEnter(to, from, next) {
-            if (window.Laravel.isLoggedin) {
-                return next('dashboard');
-            }
-            next();
-        }
+        
     }
 </script>

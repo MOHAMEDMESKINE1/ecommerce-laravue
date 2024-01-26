@@ -13,6 +13,7 @@ class Product extends Model
 {
     use HasFactory;
     // public $timestamps = false;
+    
     protected $fillable = [
         'title',
         'description',
@@ -22,8 +23,8 @@ class Product extends Model
         'quantity',
         'size',
         'color',
-        'category',
-    ];
+        'category_id',
+ ];
     // protected $guarded  = [""];
 
     public function cart()

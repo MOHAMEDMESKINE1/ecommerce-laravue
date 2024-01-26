@@ -23,34 +23,7 @@ class AuthController extends Controller
     //  }
     public function login(Request $request){
        try {
-        //      //form validation
-        // $this->validate($request, [
-        //     'email' => 'required|max:255',
-        //     'password' => 'required|min:6|max:255',
-        // ]);
-        // //login user
-        // if(auth()->attempt([
-        //     'email' => $request->email,
-        //     'password' => $request->password
-        // ])){
-        //     //login success
-        //     $user = User::where('email', $request->email)->first();
-        //     $token = $user->createToken('simple_user')->plainTextToken;
-        //     return response()->json([
-        //         'success' => true,
-        //         'user' => [
-        //             'currentToken' => $token,
-        //             'data' => $user
-        //         ]
-        //     ]);
-        // }else{
-        //     //login fail
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'These credentials do not match any of our records.'
-        //     ]);
-        // }
-
+   
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',

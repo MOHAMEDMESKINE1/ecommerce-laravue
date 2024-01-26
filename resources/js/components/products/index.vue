@@ -188,7 +188,7 @@
                                     <tr>
                                       <td>
                                         <div v-if="product.photo">
-                                          <img  :src="'storage/products/'+product.photo" class="me-2" alt="image">
+                                          <img  :src="'/products/images/'+product.photo" class="me-2" alt="image">
                                           <p> {{product.title}}</p>
                                         </div>
                                         <div v-else>
@@ -259,7 +259,9 @@ import useCategories from '../../composables/categories';
 
 
 // produtcs
-  const {products,errors,
+  const {
+    products,
+    errors,
     getProducts,
     addProduct,
     destroyProduct,
@@ -297,6 +299,7 @@ import useCategories from '../../composables/categories';
     
   );
   function saveProduct() {
+      
         let formdata = new FormData();
         formdata.append('title',title.value)
         formdata.append('description',description.value)
@@ -343,7 +346,7 @@ import useCategories from '../../composables/categories';
     }
 
       // clear fields
-  const  resetForm = () => {
+    const  resetForm = () => {
     title.value = ""
     description.value = ""
     price.value = ""

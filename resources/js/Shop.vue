@@ -11,7 +11,7 @@
                                 <i class="fa fa-angle-down text-dark"></i>
                             </a>
                         
-                            <nav class="collapse show navbar bg-light navbar-vertical  navbar-light align-items-end p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                            <!-- <nav class="collapse show navbar bg-light navbar-vertical  navbar-light align-items-end p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                                 <div class="navbar-nav w-100 overflow-hidden mx-auto" style="height: 410px">
                                     <div class="nav-item dropdown mx-auto">
                                         <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
@@ -33,7 +33,7 @@
                                     <a href="" class="nav-item nav-link">Shoes</a>
                                 </div>
                                 </div>
-                            </nav>
+                            </nav> -->
                         </div>
                         <div class="col-lg-3 col-md-12">
                             <!-- Price Start -->
